@@ -1,0 +1,44 @@
+<script src="js/drive.js" type="text/javascript"> </script>
+<script src="https://apis.google.com/js/client.js"></script>
+<div id="authorize-div" >
+  <span>Please </span>
+  <!--Button for the user to click to initiate auth sequence -->
+  <input id="authorize-button" type="button" value="Log In" onclick="handleAuthClick(event);"/>
+</div>
+
+
+
+<div id="output" ng-controller="DriveController">
+  <div class="col-md-12">
+    <div id="loadSongs" class="thumbnail" ng-click="getAudio();">
+      <p class="title">{{ bandName }}</p>
+    </div>
+  </div>
+  <div class="container">
+    <div ng-repeat="folder in folders" class="col-md-6">
+      <div class="thumbnail folder" ng-click="openFolder($index)">
+        <p class="title">{{ folder.name }}</p>
+        <p class="date">{{ folder.id}} </p>
+      </div>
+    </div>
+  </div>
+  <hr>
+  <div class="container">
+    <div ng-repeat="song in files" class="col-md-6">
+      <div class="thumbnail file">
+        <audio id="audio" style="width: relative;" controls>
+         <source id="m4aSource" ng-src="{{ song.path }}" type="audio/mp4" />
+         <p>Your browser does not support HTML5 audio.</p>
+        </audio>
+        <p class="title">{{ song.name }}</p>
+        <p class="date">{{ song.pubdate | date}} </p>
+        <br>
+        <p class="comment">{{ song.path }}</p>
+        <div class="rating">
+          <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
+          <p class="dislikes" ng-click="minusOne($index)">+{{ song.dislikes }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
