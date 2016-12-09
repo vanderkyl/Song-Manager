@@ -1,26 +1,8 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
   $scope.bandName = "Vanderfry"
-  $scope.videos = [
-  {
-    name: 'Drive Video',
-    pubdate: new Date('2016', '11', '10'),
-    video: 'https://drive.google.com/file/d/0BysYdC4iJkFUeEgzcEZNRWxtb28/preview',
-    likes: 0,
-    dislikes: 0,
-    comment: "This is a video from google drive"
-  }
-  ];
-  $scope.plusOne = function(index) {
-    $scope.videos[index].likes += 1;
-  };
-  $scope.minusOne = function(index) {
-    $scope.videos[index].dislikes += 1;
-  };
-  $scope.getVideoURL = function(index) {
-    var video = document.getElementById('video');
-    video.src = $scope.videos[index].video;
-  };
+  // Folders
+  $scope.previousFolders = [];
   $scope.folders = [];
   $scope.addFolder = function(folder) {
     var folderObject = {
@@ -29,6 +11,8 @@ function($scope, $sce) {
     };
     $scope.folders.push(folderObject);
   };
+  // Files
+  $scope.previousFiles = [];
   $scope.files = [];
   $scope.addFile = function(file) {
     var fileObject = {
@@ -41,9 +25,6 @@ function($scope, $sce) {
       comment: "Nothing"
     }
     $scope.files.push(fileObject);
-  };
-  $scope.openFolder = function(index) {
-
   };
   $scope.plusOne = function(index) {
     $scope.files[index].likes += 1;
