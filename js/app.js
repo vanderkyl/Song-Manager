@@ -1,5 +1,9 @@
 var app = angular.module('myApp', ['ngRoute', 'ngResource']);
 
+app.factory('folders', function () {
+    return folders;
+});
+
 app.config(function ($routeProvider) {
   $routeProvider.when('/', {
     controller: 'MainController',

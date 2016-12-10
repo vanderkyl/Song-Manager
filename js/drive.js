@@ -3,7 +3,10 @@
 var CLIENT_ID = '528197877151-u6dq0rnndrkjcsflhfc7550dnleu9vju.apps.googleusercontent.com';
 var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
-var FILE_LIST = {};
+var FILE_LIST = [];
+var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
+var filesReady = false;
+
 /**
  * Check if current user has authorized this application.
  */
@@ -50,9 +53,15 @@ function handleAuthClick(event) {
 // Store and display files and folders
 function displayFiles(response) {
   console.log(response);
-  FILE_LIST = response;
+
+  if (FILE_LIST.length == 0) {
+    FILE_LIST = response;
+    document.getElementById("loadSongs").style.display = "block";
+  } else {
+    FILE_LIST = response;
+    filesReady = true;
+  }
   console.log("Done!!!");
-  document.getElementById("loadSongs").style.display = "block";
 }
 
 
@@ -61,7 +70,7 @@ function displayFiles(response) {
  *
  * @param {Function} callback Function to call when the request is complete.
  */
-function listFiles(callback) {
+function listFiles(folderId) {
   var retrievePageOfFiles = function(request, result) {
     request.execute(function(resp) {
       result = result.concat(resp.items);
@@ -73,13 +82,18 @@ function listFiles(callback) {
         retrievePageOfFiles(request, result);
       } else {
         displayFiles(result);
+
       }
     });
   }
   var initialRequest = gapi.client.drive.files.list({
-    q: "'0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ' in parents"
+    q: "'" + folderId + "' in parents"
   });
-  retrievePageOfFiles(initialRequest, []);
+  return retrievePageOfFiles(initialRequest, []);
+}
+
+function loadFiles() {
+  listFiles(FOLDER_ID);
 }
 
 /**
@@ -87,7 +101,7 @@ function listFiles(callback) {
  */
 function loadDriveApi() {
   console.log("Loading files from Google Drive...");
-  gapi.client.load('drive', 'v2', listFiles);
+  gapi.client.load('drive', 'v2', loadFiles);
   /*
   var json = gapi.client.request("https://www.googleapis.com/drive/v2/files/0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ/children");
   json.then(function(response) {
