@@ -26,7 +26,7 @@
   <div class="container">
     <div ng-repeat="song in files" class="col-md-6">
       <div class="thumbnail file">
-        <audio id="audio" style="width: relative;" controls>
+        <audio id="audio" style="width: relative;" controls="controls" preload="metadata">
          <source id="m4aSource" ng-src="{{ song.path }}" type="audio/mp4" />
          <p>Your browser does not support HTML5 audio.</p>
         </audio>

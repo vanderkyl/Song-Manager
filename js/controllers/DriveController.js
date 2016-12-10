@@ -1,18 +1,7 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
   $scope.bandName = "Vanderfry"
-  $scope.safeApply = function(fn) {
-    var phase = this.$root.$$phase;
-    if(phase == '$apply' || phase == '$digest') {
-      if(fn && (typeof(fn) === 'function')) {
-        fn();
-      }
-    } else {
-      this.$apply(fn);
-    }
-  };
   // Folders
-  $scope.previousFolders = [];
   $scope.folders = [];
   $scope.addFolder = function(folder) {
     var folderObject = {
@@ -23,28 +12,47 @@ function($scope, $sce) {
       $scope.folders.push(folderObject);
     });
   };
-  $scope.reloadFiles = function() {
+  $scope.loadFiles = function() {
     console.log("Cleared previous folders and files.");
+    $scope.addPreviousButton();
     $scope.getFiles();
     filesReady = false;
-  }
+  };
   $scope.waitUntilFilesAreLoaded = function() {
     console.log("Checking if files are ready...");
     if (filesReady) {
-      $scope.reloadFiles();
+      console.log("Loading files...")
+      $scope.loadFiles();
     } else {
       setTimeout($scope.waitUntilFilesAreLoaded, 2000);
     }
-  }
+  };
+  $scope.addPreviousButton = function() {
+    $scope.safeApply(function() {
+      $scope.folders.push({
+        name: "Back To Previous Folder",
+        id: -1
+      });
+    });
+  };
   $scope.openFolder = function(index) {
-    $scope.previousFolders = $scope.folders;
-    listFiles($scope.folders[index].id);
-    console.log("Files are loading. Please wait...");
+    var folderId = $scope.folders[index].id;
+    $scope.emptyFilesAndFolders();
+    if (folderId != -1) {
+      $scope.previousFiles = FILE_LIST;
+      listFiles(folderId);
+      console.log("Files are loading. Please wait...");
+      $scope.waitUntilFilesAreLoaded();
+    } else {
+      FILE_LIST = $scope.previousFiles;
+      $scope.getFiles();
+    }
+  };
+  $scope.emptyFilesAndFolders = function() {
     $scope.folders.length = 0;
     $scope.files.length = 0;
     $scope.folders = [];
     $scope.files = [];
-    $scope.waitUntilFilesAreLoaded();
   };
   // Files
   $scope.previousFiles = [];
@@ -80,7 +88,7 @@ function($scope, $sce) {
       console.log("Adding File [" + file.title + "] - Number of files: " + $scope.files.length);
       $scope.addFile(file);
     }
-    if ($scope.previousFolders.length == 0) {
+    if ($scope.previousFiles.length == 0) {
       document.getElementById("loadSongs").style.display = "none";
     }
   };
@@ -90,6 +98,7 @@ function($scope, $sce) {
       $scope.checkFile(FILE_LIST[i]);
     }
   };
+  // Safely wait until the digest is funished before applying the ui change
   $scope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
     if(phase == '$apply' || phase == '$digest') {
