@@ -71,7 +71,10 @@ function($scope, $sce) {
     });
     $scope.recentFiles.push(file);
     document.getElementById("audio").load();
-    document.getElementById("file").style.display = "block";
+    var fileDiv = document.getElementById("file")
+    fileDiv.style.display = "block";
+    $('#file').scrollView()
+
     DISQUS.reset({
       reload: true,
       config: function () {
@@ -84,6 +87,13 @@ function($scope, $sce) {
     });
     //window.location = "/#/drive-audio#" + FILE_ID;
   };
+  $.fn.scrollView = function () {
+    return this.each(function () {
+        $('html, body').animate({
+            scrollTop: $(this).offset().top
+        }, 1000);
+    });
+}
   $scope.addFile = function(file) {
     var fileObject = {
       name: file.title,
