@@ -39,6 +39,7 @@ function($scope, $sce) {
     var folderId = $scope.folders[index].id;
     $scope.emptyFilesAndFolders();
     if (folderId != -1) {
+      document.getElementById('loading').style.display = "block";
       $scope.previousFiles = FILE_LIST;
       listFiles(folderId);
       console.log("Files are loading. Please wait...");
@@ -143,6 +144,7 @@ function($scope, $sce) {
     for (var i = 0; i < FILE_LIST.length; i++) {
       $scope.checkFile(FILE_LIST[i]);
     }
+    document.getElementById('loading').style.display = "none";
   };
   // Safely wait until the digest is funished before applying the ui change
   $scope.safeApply = function(fn) {

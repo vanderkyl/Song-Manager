@@ -46,9 +46,11 @@ function checkAuth() {
  */
 function handleAuthResult(authResult) {
   var authorizeDiv = document.getElementById('authorize-div');
+  var loadingAnimation = document.getElementById('loading');
   if (authResult && !authResult.error) {
     // Hide auth UI, then load client library.
     authorizeDiv.style.display = 'none';
+    loadingAnimation.style.display = "block";
     loadDriveApi();
   } else {
     // Show auth UI, allowing the user to initiate authorization by
@@ -74,6 +76,7 @@ function displayFiles(response) {
   console.log(response);
   if (FILE_LIST.length == 0) {
     FILE_LIST = response;
+    document.getElementById('loading').style.display = "none";
     document.getElementById("loadSongs").style.display = "block";
   } else {
     FILE_LIST = response;

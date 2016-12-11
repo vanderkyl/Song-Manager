@@ -6,7 +6,18 @@
 </div>
 
 
-
+<div id="loading">
+  <div id="system" class="container">
+    <div id="sun"><p>Loading...</p></div>
+      <div id="earth-orbit">
+        <!-- Insert the 'earth' on the next line -->
+        <div id="earth"></div>
+        <div id="moon-orbit">
+          <div id="moon"></div>
+        </div>
+     </div>
+  </div>
+</div>
 <div id="output" ng-controller="DriveController">
   <div class="col-md-12">
     <div id="loadSongs" class="thumbnail" ng-click="getFiles();">
@@ -40,6 +51,7 @@
     </div>
   </div>
   <hr>
+
   <div id="files" class="container">
     <div ng-repeat="song in files" class="col-md-6">
       <div class="thumbnail file" ng-click="openFile($index)">

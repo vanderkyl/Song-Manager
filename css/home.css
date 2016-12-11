@@ -81,6 +81,10 @@ html, body {
   width: 100%
 }
 
+#loading {
+    display: none;
+}
+
 #file {
   display: none;
   position: relative;
