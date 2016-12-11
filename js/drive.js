@@ -5,7 +5,26 @@ var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 var FILE_LIST = [];
 var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
+var FILE_ID = "Default";
+var FILE_NAME = "";
+var URL = "http://video.vanderhoof.com:8080/#/drive-audio";
 var filesReady = false;
+
+//TODO Remove this when finished creating folder and file structure
+var TEST_FILE = [
+  {
+    title: "Test Folder",
+    mimeType: "application/vnd.google-apps.folder",
+    id: "1354"
+  },
+  {
+    title: "Test File",
+    mimeType: "file",
+    id: "1234",
+    createdDate: "2016-12-02T22:31:21.487Z",
+    webContentLink: "https://drive.google.com/uc?id=0BysYdC4iJkFUU1NrajVZR0YzVWs&export=download"
+  }
+];
 
 /**
  * Check if current user has authorized this application.
@@ -53,7 +72,6 @@ function handleAuthClick(event) {
 // Store and display files and folders
 function displayFiles(response) {
   console.log(response);
-
   if (FILE_LIST.length == 0) {
     FILE_LIST = response;
     document.getElementById("loadSongs").style.display = "block";
@@ -71,6 +89,8 @@ function displayFiles(response) {
  * @param {Function} callback Function to call when the request is complete.
  */
 function listFiles(folderId) {
+  //displayFiles(TEST_FILE);
+
   var retrievePageOfFiles = function(request, result) {
     request.execute(function(resp) {
       result = result.concat(resp.items);

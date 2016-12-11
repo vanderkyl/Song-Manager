@@ -53,10 +53,37 @@ function($scope, $sce) {
     $scope.files.length = 0;
     $scope.folders = [];
     $scope.files = [];
+    document.getElementById("file").style.display = "none";
   };
   // Files
   $scope.previousFiles = [];
   $scope.files = [];
+  $scope.recentFiles = [];
+  $scope.file = {};
+  $scope.openFile = function(index) {
+    var file = $scope.files[index];
+    $scope.safeApply(function(index) {
+      console.log(file);
+      $scope.file = file;
+      FILE_ID = file.id;
+      FILE_NAME = file.title
+      console.log($scope.file);
+    });
+    $scope.recentFiles.push(file);
+    document.getElementById("audio").load();
+    document.getElementById("file").style.display = "block";
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        var id = $scope.file.id;
+        console.log(id);
+        this.page.identifier = id;
+        this.page.url = "http://kylevanderhoof.com/" + id;
+        this.page.title = "File";
+      }
+    });
+    //window.location = "/#/drive-audio#" + FILE_ID;
+  };
   $scope.addFile = function(file) {
     var fileObject = {
       name: file.title,
@@ -65,15 +92,24 @@ function($scope, $sce) {
       pubdate: file.createdDate,
       likes: 0,
       dislikes: 0,
-      comment: "Nothing"
+      comment: "Nothing",
+      index: $scope.files.length
     };
     $scope.safeApply(function() {
       $scope.files.push(fileObject);
     });
 
   };
+  $scope.plusOneOnFile = function() {
+    $scope.file.likes += 1;
+    //$scope.files[$scope.file.index].likes += 1;
+  };
   $scope.plusOne = function(index) {
     $scope.files[index].likes += 1;
+  };
+  $scope.minusOneOnFile = function() {
+    $scope.file.dislikes += 1;
+    //$scope.files[$scope.file.index].dislikes += 1;
   };
   $scope.minusOne = function(index) {
     $scope.files[index].dislikes += 1;
