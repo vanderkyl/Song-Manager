@@ -15,7 +15,7 @@ var TEST_FILE = [
   {
     title: "Test Folder",
     mimeType: "application/vnd.google-apps.folder",
-    id: "1354"
+    id: "TEST"
   },
   {
     title: "Test File",
@@ -92,33 +92,39 @@ function displayFiles(response) {
  * @param {Function} callback Function to call when the request is complete.
  */
 function listFiles(folderId) {
-  //displayFiles(TEST_FILE);
-
-  var retrievePageOfFiles = function(request, result) {
-    request.execute(function(resp) {
-      result = result.concat(resp.items);
-      var nextPageToken = resp.nextPageToken;
-      if (nextPageToken) {
-        request = gapi.client.drive.files.list({
-          'pageToken': nextPageToken
-        })
-        retrievePageOfFiles(request, result);
-      } else {
-        displayFiles(result);
-
-      }
+  //TODO Take the test portion out when finished.
+  if (folderId == "TEST") {
+    displayFiles(TEST_FILE);
+  } else {
+    var retrievePageOfFiles = function(request, result) {
+      request.execute(function(resp) {
+        result = result.concat(resp.items);
+        var nextPageToken = resp.nextPageToken;
+        if (nextPageToken) {
+          request = gapi.client.drive.files.list({
+            'pageToken': nextPageToken
+          })
+          retrievePageOfFiles(request, result);
+        } else {
+          displayFiles(result);
+        }
+      });
+    }
+    var initialRequest = gapi.client.drive.files.list({
+      q: "'" + folderId + "' in parents"
     });
+    return retrievePageOfFiles(initialRequest, []);
   }
-  var initialRequest = gapi.client.drive.files.list({
-    q: "'" + folderId + "' in parents"
-  });
-  return retrievePageOfFiles(initialRequest, []);
 }
 
 function loadFiles() {
   listFiles(FOLDER_ID);
 }
 
+function loadTestFiles() {
+  document.getElementById('authorize-div').style.display = "none";
+  displayFiles(TEST_FILE);
+}
 /**
  * Load Drive API client library.
  */

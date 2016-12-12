@@ -90,6 +90,10 @@ html, body {
   position: relative;
 }
 
+#file .rating {
+  margin-right: 30px;
+}
+
 #loadSongs {
   cursor: pointer;
   cursor: hand;

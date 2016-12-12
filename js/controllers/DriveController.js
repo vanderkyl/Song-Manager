@@ -59,6 +59,7 @@ function($scope, $sce) {
   // Files
   $scope.previousFiles = [];
   $scope.files = [];
+  //TODO Create functionality for a recent file selection
   $scope.recentFiles = [];
   $scope.file = {};
   $scope.openFile = function(index) {
@@ -94,7 +95,7 @@ function($scope, $sce) {
             scrollTop: $(this).offset().top
         }, 1000);
     });
-}
+  }
   $scope.addFile = function(file) {
     var fileObject = {
       name: file.title,
@@ -104,7 +105,8 @@ function($scope, $sce) {
       likes: 0,
       dislikes: 0,
       comment: "Nothing",
-      index: $scope.files.length
+      index: $scope.files.length,
+      timestamps: []
     };
     $scope.safeApply(function() {
       $scope.files.push(fileObject);

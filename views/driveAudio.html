@@ -3,12 +3,13 @@
   <span>Please </span>
   <!--Button for the user to click to initiate auth sequence -->
   <input id="authorize-button" type="button" value="Log In" onclick="handleAuthClick(event);"/>
+  <input id="test-button" type="button" value="Run Test" onclick="loadTestFiles();"/>
 </div>
 
 
 <div id="loading">
   <div id="system" class="container">
-    <div id="sun"><p>Loading...</p></div>
+    <div id="sun"><p><strong>LOADING</strong></p></div>
       <div id="earth-orbit">
         <!-- Insert the 'earth' on the next line -->
         <div id="earth"></div>
@@ -42,13 +43,14 @@
      <p>Your browser does not support HTML5 audio.</p>
     </audio>
     <p class="date">{{ file.pubdate | date}} </p>
-    <br>
-    <p class="comment">{{ file.id }}</p>
-    <div id="disqus_thread"></div>
-    <div class="rating">
+    <p class="comment col-md-6"></p>
+    <div class="rating col-md-6">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
-      <p class="dislikes" ng-click="minusOneOnFile()">+{{ file.dislikes }}</p>
+      <p class="dislikes" ng-click="minusOneOnFile()">-{{ file.dislikes }}</p>
     </div>
+    <br>
+    <div id="disqus_thread"></div>
+    <br>
   </div>
   <hr>
 
@@ -61,7 +63,7 @@
         <p class="comment">{{ song.path }}</p>
         <div class="rating">
           <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
-          <p class="dislikes" ng-click="minusOne($index)">+{{ song.dislikes }}</p>
+          <p class="dislikes" ng-click="minusOne($index)">-{{ song.dislikes }}</p>
         </div>
       </div>
     </div>

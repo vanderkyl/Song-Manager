@@ -32,7 +32,7 @@
 
 #sun p {
   text-align: center;
-  margin-top: 30px;
+  margin-top: 32px;
 }
 
 #sun:hover {
@@ -80,7 +80,6 @@ img:active {
     border-style: dotted;
     border-radius: 50%;
 
-
     -webkit-animation: spin-right 12s linear infinite;
      -moz-animation: spin-right 12s linear infinite;
       -ms-animation: spin-right 12s linear infinite;
@@ -104,7 +103,7 @@ img:active {
     border-style: solid;
     border-radius: 50%;
 
-    box-shadow: 0 0 128px white;
+    box-shadow: 0 0 128px green;
 }
 
 #moon-orbit {
@@ -122,11 +121,11 @@ img:active {
     border-style: dotted;
     border-radius: 50%;
 
-    -webkit-animation: spin-right 1s linear infinite;
-     -moz-animation: spin-right 1s linear infinite;
-      -ms-animation: spin-right 1s linear infinite;
-       -o-animation: spin-right 1s linear infinite;
-          animation: spin-right 1s linear infinite;
+    -webkit-animation: spin-right 3s linear infinite;
+     -moz-animation: spin-right 3s linear infinite;
+      -ms-animation: spin-right 3s linear infinite;
+       -o-animation: spin-right 3s linear infinite;
+          animation: spin-right 3s linear infinite;
 }
 
 @-webkit-keyframes spin-right {
