@@ -1,11 +1,11 @@
-<div class="main" ng-controller="MainController">
+<div class="main" ng-controller="MainController" ng-init="loadDisqus();">
   <div class="container">
 
     <h1>{{ title }}</h1>
     <h2>{{ message }}</h2>
   </div>
 
-  <div id="disqus_thread"></div>
+  <div id="disqus_thread" class="container"></div>
 
   <div id="system" class="container">
     <div id="sun"></div>

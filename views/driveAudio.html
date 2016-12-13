@@ -1,5 +1,15 @@
 <script src="https://apis.google.com/js/client.js"></script>
 <div id="authorize-div" >
+  <div id="system" class="container">
+    <div id="sun" class="driveSun" onclick="handleAuthClick(event);"><p><strong>Log In</strong></p></div>
+      <div id="earth-orbit">
+        <!-- Insert the 'earth' on the next line -->
+        <div id="earth"></div>
+        <div id="moon-orbit">
+          <div id="moon"></div>
+        </div>
+     </div>
+  </div>
   <span>Please </span>
   <!--Button for the user to click to initiate auth sequence -->
   <input id="authorize-button" type="button" value="Log In" onclick="handleAuthClick(event);"/>

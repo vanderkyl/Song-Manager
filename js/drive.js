@@ -5,8 +5,6 @@ var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 var FILE_LIST = [];
 var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
-var FILE_ID = "Default";
-var FILE_NAME = "";
 var URL = "http://video.vanderhoof.com:8080/#/drive-audio";
 var filesReady = false;
 
@@ -131,15 +129,6 @@ function loadTestFiles() {
 function loadDriveApi() {
   console.log("Loading files from Google Drive...");
   gapi.client.load('drive', 'v2', loadFiles);
-  /*
-  var json = gapi.client.request("https://www.googleapis.com/drive/v2/files/0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ/children");
-  json.then(function(response) {
-    displayFiles(response);
-  }, function(reason) {
-    console.log(reason);
-  });*/
-
-
 }
 
 function printOutput(response) {
