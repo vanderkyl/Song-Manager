@@ -24,12 +24,14 @@ function loadFile(file) {
 // Check if the "file" is a true file or a folder
 function checkFile(file, addFolder, addFile) {
   console.log("Checking...");
-  if (file.mimeType == "application/vnd.google-apps.folder") {
-    console.log("Adding Folder [" + file.title + "]");
-    addFolder(file);
-  } else {
-    console.log("Adding File [" + file.title + "]");
-    addFile(file);
+  if (file.explicitlyTrashed == false) {
+    if (file.mimeType == "application/vnd.google-apps.folder") {
+      console.log("Adding Folder [" + file.title + "]");
+      addFolder(file);
+    } else {
+      console.log("Adding File [" + file.title + "]");
+      addFile(file);
+    }
   }
   if (previousFiles.length == 0) {
     document.getElementById("loadSongs").style.display = "none";
@@ -56,6 +58,13 @@ function getFile(newFile, $sce) {
     timestamps: []
   };
   return fileObject;
+}
+
+// Guarantee that the button pressed is the only one that activates
+// Use if there is a button on top of a button.
+function stopPropogation() {
+  event.cancelBubble = true;
+    if(event.stopPropagation) event.stopPropagation();
 }
 
 $.fn.scrollView = function () {

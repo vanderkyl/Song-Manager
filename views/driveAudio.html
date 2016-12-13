@@ -1,6 +1,7 @@
 <script src="https://apis.google.com/js/client.js"></script>
 <div id="authorize-div" >
   <div id="system" class="container">
+    <!--Button for the user to click to initiate auth sequence -->
     <div id="sun" class="driveSun" onclick="handleAuthClick(event);"><p><strong>Log In</strong></p></div>
       <div id="earth-orbit">
         <!-- Insert the 'earth' on the next line -->
@@ -10,9 +11,6 @@
         </div>
      </div>
   </div>
-  <span>Please </span>
-  <!--Button for the user to click to initiate auth sequence -->
-  <input id="authorize-button" type="button" value="Log In" onclick="handleAuthClick(event);"/>
   <input id="test-button" type="button" value="Run Test" onclick="loadTestFiles();"/>
 </div>
 
@@ -30,6 +28,7 @@
   </div>
 </div>
 <div id="output" ng-controller="DriveController">
+  <h2>{{ title }}</h2>
   <div class="col-md-12">
     <div id="loadSongs" class="thumbnail" ng-click="getFiles();">
       <p class="title">{{ bandName }}</p>
@@ -39,7 +38,6 @@
     <div ng-repeat="folder in folders" class="col-md-6">
       <div class="thumbnail folder" ng-click="openFolder($index)">
         <p class="title">{{ folder.name }}</p>
-        <p class="date">{{ folder.id}} </p>
       </div>
     </div>
   </div>
@@ -47,16 +45,16 @@
 
   <div id="file" class="container">
     <br><br>
-    <p class="fileTitle">{{ file.name }}</p><br><br>
+    <p class="fileTitle">{{ file.name }}</p>
+    <p class="close" ng-click> x </p><br><br>
     <audio id="audio" style="width: relative;" controls="controls" preload="metadata">
      <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
      <p>Your browser does not support HTML5 audio.</p>
     </audio>
     <p class="date">{{ file.pubdate | date}} </p>
-    <p class="comment col-md-6"></p>
-    <div class="rating col-md-6">
+    <div class="rating">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
-      <p class="dislikes" ng-click="minusOneOnFile()">-{{ file.dislikes }}</p>
+      <p class="download" ng-click="download()"> ->] </p>
     </div>
     <br>
     <div id="disqus_thread"></div>
@@ -65,15 +63,13 @@
   <hr>
 
   <div id="files" class="container">
-    <div ng-repeat="song in files" class="col-md-6">
+    <div ng-repeat="song in files" class="col-md-4">
       <div class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
         <p class="date">{{ song.pubdate | date}} </p>
-        <br>
-        <p class="comment">{{ song.path }}</p>
         <div class="rating">
           <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
-          <p class="dislikes" ng-click="minusOne($index)">-{{ song.dislikes }}</p>
+          <p class="download" ng-click="download($index)"> ->] </p>
         </div>
       </div>
     </div>

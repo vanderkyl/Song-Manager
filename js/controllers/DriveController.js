@@ -40,13 +40,15 @@ function($scope, $sce) {
     $scope.file.likes += 1;
   };
   $scope.plusOne = function(index) {
+    stopPropogation();
     $scope.files[index].likes += 1;
   };
-  $scope.minusOneOnFile = function() {
-    $scope.file.dislikes += 1;
+  $scope.download = function(index) {
+    stopPropogation();
+    window.location = $scope.files[index].path;
   };
-  $scope.minusOne = function(index) {
-    $scope.files[index].dislikes += 1;
+  $scope.downloadFile = function() {
+    window.location = $scope.files[index].path;
   };
   // Go through the files that were saved from the Google Api Call
   $scope.getFiles = function() {
