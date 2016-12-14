@@ -121,7 +121,7 @@ function loadFiles() {
 
 function loadTestFiles() {
   document.getElementById('authorize-div').style.display = "none";
-  displayFiles(TEST_FILE);
+  listFiles("TEST");
 }
 /**
  * Load Drive API client library.

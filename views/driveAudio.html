@@ -1,4 +1,3 @@
-<script src="https://apis.google.com/js/client.js"></script>
 <div id="authorize-div" >
   <div id="system" class="container">
     <!--Button for the user to click to initiate auth sequence -->
@@ -6,15 +5,13 @@
       <div id="earth-orbit">
         <!-- Insert the 'earth' on the next line -->
         <div id="earth"></div>
-        <div id="moon-orbit">
-          <div id="moon"></div>
+          <div id="moon-orbit">
+            <div id="moon"></div>
+          </div>
         </div>
-     </div>
   </div>
   <input id="test-button" type="button" value="Run Test" onclick="loadTestFiles();"/>
 </div>
-
-
 <div id="loading">
   <div id="system" class="container">
     <div id="sun"><p><strong>LOADING</strong></p></div>
@@ -45,8 +42,9 @@
 
   <div id="file" class="container">
     <br><br>
+    <p class="close" ng-click> x </p>
     <p class="fileTitle">{{ file.name }}</p>
-    <p class="close" ng-click> x </p><br><br>
+    <br><br>
     <audio id="audio" style="width: relative;" controls="controls" preload="metadata">
      <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
      <p>Your browser does not support HTML5 audio.</p>
@@ -63,7 +61,7 @@
   <hr>
 
   <div id="files" class="container">
-    <div ng-repeat="song in files" class="col-md-4">
+    <div ng-repeat="song in files" class="col-md-6">
       <div class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
         <p class="date">{{ song.pubdate | date}} </p>
