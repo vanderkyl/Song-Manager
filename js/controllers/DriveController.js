@@ -55,6 +55,9 @@ function($scope, $sce) {
   };
   // Go through the files that were saved from the Google Api Call
   $scope.getFiles = function() {
+    if ($scope.previousFiles.length > 0) {
+      $scope.addPreviousButton();
+    }
     sortFiles($scope.addFolder, $scope.addFile, $scope.previousFiles);
   };
   // Add button to go back to previous folder contents
@@ -64,8 +67,7 @@ function($scope, $sce) {
     });
   };
   $scope.loadFiles = function() {
-    console.log("Loading files...")
-    $scope.addPreviousButton();
+    console.log("Loading files...");
     $scope.getFiles();
     filesReady = false;
   };

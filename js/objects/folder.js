@@ -9,21 +9,20 @@ function getFolder(folder) {
 function getPreviousButton() {
   var button = {
     name: "Back To Previous Folder",
-    id: -1
+    id: "PREV_BUTTON"
   };
   return button;
 }
 
-function loadFolder(folderId, prevFiles, loadFiles, getFiles, wait) {
-  if (folderId != -1) {
+function loadFolder(folderId, previousFiles, loadFiles, getFiles, wait) {
+  if (folderId != "PREV_BUTTON") {
     document.getElementById('loading').style.display = "block";
-    previousFiles = FILE_LIST;
-    prevFiles = previousFiles;
+    previousFiles.push(FILE_LIST);
     listFiles(folderId);
     console.log("Files are loading. Please wait...");
     wait(loadFiles);
   } else {
-    FILE_LIST = previousFiles;
+    FILE_LIST = previousFiles.pop();
     getFiles();
   }
 }

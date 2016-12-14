@@ -23,8 +23,8 @@ function loadFile(file) {
 
 function closeFile(id) {
   document.getElementById("file").style.display = "none";
-  var fileDivId = "#" + id;
-  $(fileDivId).scrollView();
+  var fileId = "#" + id;
+  $(fileId).scrollView();
 }
 
 // Check if the "file" is a true file or a folder
