@@ -51,19 +51,42 @@ function sortFiles(addFolder, addFile) {
   document.getElementById('loading').style.display = "none";
 }
 
+function getLikes(fileId) {
+  console.log(fileId);
+  var likesId = "likes-" + fileId;
+  var fileLikes = localStorage.getItem(likesId);
+  console.log(fileLikes);
+  if (fileLikes === null) {
+    localStorage.setItem(likesId, 0);
+    var likes = parseInt(localStorage.getItem(likesId));
+    console.log(likes);
+    console.log(Number.isInteger(likes));
+    return likes;
+  } else {
+    return fileLikes;
+  }
+}
+
 function getFile(newFile, $sce) {
   var fileObject = {
     name: newFile.title,
     id: newFile.id,
     path: $sce.trustAsResourceUrl(newFile.webContentLink),
     pubdate: newFile.createdDate,
-    likes: 0,
-    dislikes: 0,
+    likes: getLikes(newFile.id),
     comment: "Nothing",
     index: files.length,
     timestamps: []
   };
   return fileObject;
+}
+
+function saveLike(file) {
+  var likesId = "likes-" + file.id;
+  var likes = parseInt(localStorage.getItem(likesId));
+  likes += 1;
+  localStorage.setItem(likesId, likes);
+  file.likes = likes;
 }
 
 // Guarantee that the button pressed is the only one that activates

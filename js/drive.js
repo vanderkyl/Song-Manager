@@ -19,7 +19,7 @@ var TEST_FILE = [
   {
     title: "Test File",
     mimeType: "file",
-    id: "1234",
+    id: "-123434343",
     createdDate: "2016-12-02T22:31:21.487Z",
     webContentLink: "https://drive.google.com/uc?id=0BysYdC4iJkFUU1NrajVZR0YzVWs&export=download",
     explicitlyTrashed: false

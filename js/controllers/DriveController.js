@@ -40,11 +40,11 @@ function($scope, $sce) {
     closeFile($scope.file.id);
   };
   $scope.plusOneOnFile = function() {
-    $scope.file.likes += 1;
+    saveLike($scope.file);
   };
   $scope.plusOne = function(index) {
     stopPropogation();
-    $scope.files[index].likes += 1;
+    saveLike($scope.files[index]);
   };
   $scope.download = function(index) {
     stopPropogation();
