@@ -21,6 +21,12 @@ function loadFile(file) {
   loadDisqus(file);
 }
 
+function closeFile(id) {
+  document.getElementById("file").style.display = "none";
+  var fileDivId = "#" + id;
+  $(fileDivId).scrollView();
+}
+
 // Check if the "file" is a true file or a folder
 function checkFile(file, addFolder, addFile) {
   console.log("Checking...");

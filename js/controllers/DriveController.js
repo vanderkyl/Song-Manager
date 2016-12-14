@@ -36,6 +36,9 @@ function($scope, $sce) {
     });
     loadFile(file);
   };
+  $scope.closeFile = function() {
+    closeFile($scope.file.id);
+  };
   $scope.plusOneOnFile = function() {
     $scope.file.likes += 1;
   };

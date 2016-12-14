@@ -6,8 +6,12 @@ html, body {
   width:100%;
 }
 
-#disqus_thread {
+.main #disqus_thread {
   margin-left: -30px;
+}
+
+.navbar-nav {
+  font-size: 20px;
 }
 
 .header {
@@ -131,22 +135,6 @@ html, body {
   font-weight: 200;
 }
 
-.price {
-  background-color: #39D1B4 ;
-  color: #fff;
-  font-size: 18px;
-  border-radius: 50%;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-  font-weight: 200;
-  height: 80px;
-  line-height: 80px;
-  text-align: center;
-  width: 80px;
-  position: absolute;
-  top: -40px;
-  right: 20px;
-}
-
 .rating {
   text-align: right;
   -webkit-user-select: none;
@@ -160,10 +148,10 @@ html, body {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-size: 15px;
-  line-height: 40px;
-  min-width: 40px;
-  height: 40px;
+  font-size: 19px;
+  line-height: 50px;
+  min-width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin: 0 -30px 0 40px;
   text-align: center;
@@ -173,18 +161,18 @@ html, body {
 }
 
 .close {
-  background: lightgrey ;
-  color: #fff;
+  background: lightgrey;
+  color: #000;
   cursor: pointer;
   display: inline-block;
-  font-size: 15px;
-  line-height: 20px;
-  min-width: 20px;
-  height: 20px;
+  font-size: 19px;
+  line-height: 30px;
+  min-width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin: 0 -30px 0 40px;
+  margin: 0 5px 0 40px;
   text-align: center;
-  font-weight: 200;
+  font-weight: 400;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: background 500ms;
 }
@@ -194,10 +182,10 @@ html, body {
   color: #fff;
   cursor: pointer;
   display: inline-block;
-  font-size: 15px;
-  line-height: 40px;
-  min-width: 40px;
-  height: 40px;
+  font-size: 19px;
+  line-height: 50px;
+  min-width: 50px;
+  height: 50px;
   border-radius: 50%;
   margin: 0 -30px 0 40px;
   text-align: center;

@@ -13,14 +13,16 @@ var TEST_FILE = [
   {
     title: "Test Folder",
     mimeType: "application/vnd.google-apps.folder",
-    id: "TEST"
+    id: "TEST",
+    explicitlyTrashed: false
   },
   {
     title: "Test File",
     mimeType: "file",
     id: "1234",
     createdDate: "2016-12-02T22:31:21.487Z",
-    webContentLink: "https://drive.google.com/uc?id=0BysYdC4iJkFUU1NrajVZR0YzVWs&export=download"
+    webContentLink: "https://drive.google.com/uc?id=0BysYdC4iJkFUU1NrajVZR0YzVWs&export=download",
+    explicitlyTrashed: false
   }
 ];
 

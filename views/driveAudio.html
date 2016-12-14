@@ -42,7 +42,7 @@
 
   <div id="file" class="container">
     <br><br>
-    <p class="close" ng-click> x </p>
+    <p class="close" ng-click="closeFile()"> x </p>
     <p class="fileTitle">{{ file.name }}</p>
     <br><br>
     <audio id="audio" style="width: relative;" controls="controls" preload="metadata">
@@ -52,7 +52,7 @@
     <p class="date">{{ file.pubdate | date}} </p>
     <div class="rating">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
-      <p class="download" ng-click="download()"> ->] </p>
+      <p class="download" ng-click="downloadFile()"> ->] </p>
     </div>
     <br>
     <div id="disqus_thread"></div>
@@ -62,7 +62,7 @@
 
   <div id="files" class="container">
     <div ng-repeat="song in files" class="col-md-6">
-      <div class="thumbnail file" ng-click="openFile($index)">
+      <div id="{{ song.id }}" class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
         <p class="date">{{ song.pubdate | date}} </p>
         <div class="rating">
