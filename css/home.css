@@ -84,6 +84,10 @@ html, body {
   cursor: hand;
 }
 
+.file:hover, .folder:hover {
+  background-color: #f1f1f1;
+}
+
 #audio {
   width: 100%
 }

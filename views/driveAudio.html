@@ -45,7 +45,7 @@
     <p class="close" ng-click="closeFile()"> x </p>
     <p class="fileTitle">{{ file.name }}</p>
     <br><br>
-    <audio id="audio" style="width: relative;" controls="controls" preload="metadata">
+    <audio id="audio" style="width: relative;" preload="auto" controls>
      <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
      <p>Your browser does not support HTML5 audio.</p>
     </audio>
