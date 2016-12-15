@@ -14,10 +14,12 @@ function loadDisqus(file) {
 }
 
 function loadFile(file) {
-  document.getElementById("audio").load();
-  var fileDiv = document.getElementById("file")
+  var audio = document.getElementById("audio");
+  var fileDiv = document.getElementById("file");
+  $('#file').scrollView();
   fileDiv.style.display = "block";
-  $('#file').scrollView()
+  audio.load();
+  audio.play();
   loadDisqus(file);
 }
 
