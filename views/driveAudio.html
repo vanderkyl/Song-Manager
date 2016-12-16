@@ -1,7 +1,7 @@
 <div id="authorize-div" >
   <div id="system" class="container">
     <!--Button for the user to click to initiate auth sequence -->
-    <div id="sun" class="driveSun" onclick="handleAuthClick(event);"><p><strong>Log In</strong></p></div>
+    <div id="sun" class="driveSun" onclick="handleAuthClick(event);"><p><strong>LOG IN</strong></p></div>
       <div id="earth-orbit">
         <!-- Insert the 'earth' on the next line -->
         <div id="earth"></div>
@@ -34,7 +34,7 @@
   <div class="container">
     <div ng-repeat="folder in folders" class="col-md-6">
       <div class="thumbnail folder" ng-click="openFolder($index)">
-        <p class="title">{{ folder.name }}</p>
+        <p class="folderTitle">{{ folder.name }}</p>
       </div>
     </div>
   </div>
@@ -46,9 +46,12 @@
     <p class="fileTitle">{{ file.name }}</p>
     <br><br>
     <audio id="audio" style="width: relative;" preload="auto" controls>
-     <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
-     <p>Your browser does not support HTML5 audio.</p>
+      <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
+      <p>Your browser does not support HTML5 audio.</p>
     </audio>
+    <div id="video">
+      <iframe src="{{ file.previewPath }}"></iframe>
+    </div>
     <p class="date">{{ file.pubdate | date}} </p>
     <div class="rating">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>

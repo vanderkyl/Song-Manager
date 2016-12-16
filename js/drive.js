@@ -14,7 +14,8 @@ var TEST_FILE = [
     title: "Test Folder",
     mimeType: "application/vnd.google-apps.folder",
     id: "TEST",
-    explicitlyTrashed: false
+    explicitlyTrashed: false,
+    type: "m4a"
   },
   {
     title: "Test File",

@@ -14,19 +14,49 @@ function loadDisqus(file) {
 }
 
 function loadFile(file) {
+  hidePreviousFile();
+  switch(file.type) {
+    case "m4a":
+      loadAudio(file);
+      break;
+    case "MP4":
+      loadVideo(file);
+      break;
+    default:
+  }
+}
+
+function loadVideo(file) {
+  var video = document.getElementById("video");
+  var fileDiv = document.getElementById("file");
+  $('#file').scrollView();
+  fileDiv.style.display = "block";
+  video.style.display = "block";
+  loadDisqus(file);
+}
+
+function loadAudio(file) {
   var audio = document.getElementById("audio");
   var fileDiv = document.getElementById("file");
   $('#file').scrollView();
   fileDiv.style.display = "block";
+  audio.style.display = "block";
   audio.load();
   audio.play();
   loadDisqus(file);
 }
 
 function closeFile(id) {
-  document.getElementById("file").style.display = "none";
+  hidePreviousFile();
   var fileId = "#" + id;
   $(fileId).scrollView();
+}
+
+function hidePreviousFile() {
+  console.log("Hiding previous file.");
+  document.getElementById("file").style.display = "none";
+  document.getElementById("audio").style.display = "none";
+  document.getElementById("video").style.display = "none";
 }
 
 // Check if the "file" is a true file or a folder
@@ -70,10 +100,13 @@ function getLikes(fileId) {
 }
 
 function getFile(newFile, $sce) {
+  var fileId = newFile.id;
   var fileObject = {
     name: newFile.title,
-    id: newFile.id,
+    id: fileId,
     path: $sce.trustAsResourceUrl(newFile.webContentLink),
+    previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+    type: newFile.fileExtension,
     pubdate: newFile.createdDate,
     likes: getLikes(newFile.id),
     comment: "Nothing",

@@ -1,6 +1,6 @@
 #authorize-div {
     position: relative;
-    height: auto; 
+    height: auto;
 }
 
 #system {
@@ -42,7 +42,9 @@
 
 #sun p {
   text-align: center;
-  margin-top: 32px;
+  margin-top: 28px;
+  font-size: large;
+  color: #737373;
 }
 
 #sun:hover {

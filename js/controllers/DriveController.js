@@ -3,6 +3,7 @@ function($scope, $sce) {
   $scope.bandName = "Vanderfry"
   // Folders
   $scope.folders = [];
+  $scope.folderName = "";
   // Files
   $scope.files = [];
   $scope.file = {};
@@ -20,7 +21,9 @@ function($scope, $sce) {
     });
   };
   $scope.openFolder = function(index) {
-    var folderId = $scope.folders[index].id;
+    var folder = $scope.folders[index];
+    var folderId = folder.id;
+    $scope.folderName = folder.name;
     $scope.clearFilesAndFolders();
     loadFolder(folderId,
       $scope.previousFiles,

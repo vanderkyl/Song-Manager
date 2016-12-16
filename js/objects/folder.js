@@ -22,6 +22,7 @@ function loadFolder(folderId, previousFiles, loadFiles, getFiles, wait) {
     console.log("Files are loading. Please wait...");
     wait(loadFiles);
   } else {
+    hidePreviousFile();
     FILE_LIST = previousFiles.pop();
     getFiles();
   }
