@@ -24,6 +24,7 @@ function loadFile(file) {
       break;
     default:
   }
+  loadDisqus(file);
 }
 
 function loadVideo(file) {
@@ -32,7 +33,6 @@ function loadVideo(file) {
   $('#file').scrollView();
   fileDiv.style.display = "block";
   video.style.display = "block";
-  loadDisqus(file);
 }
 
 function loadAudio(file) {
@@ -43,7 +43,6 @@ function loadAudio(file) {
   audio.style.display = "block";
   audio.load();
   audio.play();
-  loadDisqus(file);
 }
 
 function closeFile(id) {
