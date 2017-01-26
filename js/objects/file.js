@@ -19,7 +19,7 @@ function loadDisqus(file) {
       var id = file.id;
       console.log(id);
       this.page.identifier = id;
-      this.page.url = "http://kylevanderhoof/disqus?id=" + id;
+      this.page.url = "http://kylevanderhoof.com/disqus?id=" + id;
       this.page.title = file.name;
     }
   });
