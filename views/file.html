@@ -1,0 +1,43 @@
+<div id="fileId" class="container" ng-controller="DriveController">
+  <br><br>
+  <p class="fileTitle">{{ file.name }}</p>
+  <br><br>
+  <audio id="audioId" style="width: relative;" preload="auto" controls>
+    <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
+    <p>Your browser does not support HTML5 audio.</p>
+  </audio>
+  <div id="videoId">
+    <iframe src="{{ file.previewPath }}"></iframe>
+  </div>
+  <p class="date">{{ file.pubdate | date}} </p>
+  <div class="rating">
+    <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
+    <p class="download" ng-click="downloadFile()"> ->] </p>
+  </div>
+  <br>
+  <div id="disqus_threadId"></div>
+  <br>
+</div>
+<script>
+  document.getElementById("fileId").onload = function() {getId()};
+  function getId() {
+    console.log("Getting parameter: ");
+    fileId = getParameterByName('id');
+    console.log(fileId);
+    if (fileId !== null) {
+      var file = {
+        name: fileId,
+        id: fileId,
+        path: "https://drive.google.com/uc?id=" + fileId + "&export=download",
+        previewPath: "https://drive.google.com/file/d/" + fileId + "/preview",
+        type: "m4a",
+        pubdate: fileId,
+        likes: getLikes(fileId),
+        comment: "Nothing",
+        index: 0,
+        timestamps: []
+      };
+      loadFilePage(file);
+    }
+  };
+</script>

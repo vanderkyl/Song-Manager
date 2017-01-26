@@ -15,7 +15,11 @@ app.config(function ($routeProvider) {
   })
   .when('/drive-audio', {
     controller: 'DriveController',
-    templateUrl: 'views/driveAudio.html'
+    templateUrl: 'views/drive.html'
+  })
+  .when('/file', {
+    controller: 'DriveController',
+    templateUrl: 'views/file.html'
   })
   .otherwise({
     redirectTo: '/'

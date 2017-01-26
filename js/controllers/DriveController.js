@@ -1,6 +1,6 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
-  $scope.bandName = "Vanderfry"
+  $scope.bandName = "Enter"
   // Folders
   $scope.folders = [];
   $scope.folderName = "";
@@ -37,6 +37,7 @@ function($scope, $sce) {
       $scope.file = file;
       $scope.recentFiles.push(file);
     });
+    hidePreviousFile();
     loadFile(file);
   };
   $scope.closeFile = function() {

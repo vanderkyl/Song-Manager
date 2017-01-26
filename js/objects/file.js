@@ -1,5 +1,5 @@
 var previousFiles = [];
-
+/*
 function loadDisqus(file) {
   DISQUS.reset({
     reload: true,
@@ -11,16 +11,40 @@ function loadDisqus(file) {
       this.page.title = file.name;
     }
   });
+}*/
+function loadDisqus(file) {
+  DISQUS.reset({
+    reload: true,
+    config: function () {
+      var id = file.id;
+      console.log(id);
+      this.page.identifier = id;
+      this.page.url = "http://kylevanderhoof/disqus?id=" + id;
+      this.page.title = file.name;
+    }
+  });
 }
 
 function loadFile(file) {
-  hidePreviousFile();
   switch(file.type) {
     case "m4a":
       loadAudio(file);
       break;
     case "MP4":
       loadVideo(file);
+      break;
+    default:
+  }
+  loadDisqus(file);
+}
+
+function loadFilePage(file) {
+  switch(file.type) {
+    case "m4a":
+      document.getElementById("videoId") = "none";
+      break;
+    case "MP4":
+      document.getElementById("audioId") = "none";
       break;
     default:
   }
@@ -115,12 +139,37 @@ function getFile(newFile, $sce) {
   return fileObject;
 }
 
+function getDriveFile() {
+  var request = gapi.client.drive.files.get({
+    'fileId': fileId
+  });
+  request.execute(function(resp) {
+    console.log('Title: ' + resp.title);
+    console.log('Description: ' + resp.description);
+    console.log('MIME type: ' + resp.mimeType);
+  });
+}
+
 function saveLike(file) {
   var likesId = "likes-" + file.id;
   var likes = parseInt(localStorage.getItem(likesId));
   likes += 1;
   localStorage.setItem(likesId, likes);
   file.likes = likes;
+}
+
+// Get query paramater from url
+// Credit to
+function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
 // Guarantee that the button pressed is the only one that activates

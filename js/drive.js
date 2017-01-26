@@ -4,7 +4,8 @@ var CLIENT_ID = '528197877151-u6dq0rnndrkjcsflhfc7550dnleu9vju.apps.googleuserco
 var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 var FILE_LIST = [];
-var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
+//var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
+var FOLDER_ID = "0BysYdC4iJkFUb1Rpbm1ySFNFNEE";
 var URL = "http://video.vanderhoof.com:8080/#/drive-audio";
 var filesReady = false;
 
@@ -86,6 +87,21 @@ function displayFiles(response) {
   console.log("Done!!!");
 }
 
+/**
+ * Print a file's metadata.
+ *
+ * @param {String} fileId ID of the file to print metadata for.
+ */
+function printFile(fileId) {
+  var request = gapi.client.drive.files.get({
+    'fileId': fileId
+  });
+  request.execute(function(resp) {
+    console.log('Title: ' + resp.title);
+    console.log('Description: ' + resp.description);
+    console.log('MIME type: ' + resp.mimeType);
+  });
+}
 
 /**
  * Retrieve a list of File resources.

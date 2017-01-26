@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <body onload="getDriveId();">
+
+  <script>
+    function getDriveId() {
+      console.log("Getting parameter: ");
+      fileId = getParameterByName('id');
+      console.log(fileId);
+      window.location = "/#/file?id=" + fileId;
+    };
+  </script>
+  <script src="js/objects/file.js" type="text/javascript"></script>
+  </body>
+</html>
