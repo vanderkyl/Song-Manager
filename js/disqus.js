@@ -24,7 +24,6 @@ var disqus_config = function () {
 (function() { // DON'T EDIT BELOW THIS LINE
   var d = document, s = d.createElement('script');
   s.type = 'text/javascript';
-  s.async = true;
   s.src = 'http://idea-app.disqus.com/embed.js';
   s.setAttribute('data-timestamp', +new Date());
   (d.head || d.body).appendChild(s);
