@@ -7,17 +7,18 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="css/bootstrap-theme-3.3.7.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="js/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap/bootstrap-3.3.7.min.js" type="text/javascript"></script>
-    <link href='http://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
-    <link href="css/home.css" rel="stylesheet"/>
-    <link href="css/style.css" rel="stylesheet"/>
-    <script src="js/angular/angular-1.5.8.min.js" type="text/javascript"></script>
-    <script src="js/angular/angular-route-1.5.8.min.js" type="text/javascript"></script>
-    <script src="js/angular/angular-mocks-1.5.8.js" type="text/javascript"></script>
-    <script src="js/angular/angular-resource-1.5.8.min.js" type="text/javascript"></script>
-    <script src="js/drive/client.min.js"></script>
+    <!-- App Styling -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=CenturyGothic:500,300,700,400" type="text/css">
+    <link rel="stylesheet" href="css/home.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <!-- Dependencies - Latest compiled and minified JavaScript -->
+    <script src="js/dependencies/jquery/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="js/dependencies/bootstrap/bootstrap-3.3.7.min.js" type="text/javascript"></script>
+    <script src="js/dependencies/angular/angular-1.5.8.min.js" type="text/javascript"></script>
+    <script src="js/dependencies/angular/angular-route-1.5.8.min.js" type="text/javascript"></script>
+    <script src="js/dependencies/angular/angular-mocks-1.5.8.js" type="text/javascript"></script>
+    <script src="js/dependencies/angular/angular-resource-1.5.8.min.js" type="text/javascript"></script>
+    <script src="js/dependencies/drive/client.min.js"></script>
   </head>
   <body ng-app="myApp">
     <div class="header">
@@ -38,12 +39,12 @@
     </div>
 
     <!-- Modules -->
-    <script src="js/app.js" type="text/javascript"></script>
-    <script src="js/drive.js" type="text/javascript"></script>
+    <script src="js/managers/app.js" type="text/javascript"></script>
+    <script src="js/managers/drive.js" type="text/javascript"></script>
     <script src="js/objects/folder.js" type="text/javascript"></script>
     <script src="js/objects/file.js" type="text/javascript"></script>
 
-    <script src="js/disqus.js" type="text/javascript"></script>
+    <script src="js/managers/disqus.js" type="text/javascript"></script>
     <script id="dsq-count-scr" src="//idea-app.disqus.com/count.js" async></script>
 
     <!-- Controllers -->
