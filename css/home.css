@@ -205,7 +205,7 @@ html, body {
   line-height: 50px;
   min-width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 5%;
   margin: 0 -30px 0 40px;
   text-align: center;
   font-weight: 200;
@@ -222,7 +222,7 @@ html, body {
   line-height: 30px;
   min-width: 30px;
   height: 30px;
-  border-radius: 50%;
+  border-radius: 5%;
   margin: 0 5px 0 40px;
   text-align: center;
   font-weight: 400;
@@ -239,7 +239,7 @@ html, body {
   line-height: 50px;
   min-width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 5%;
   margin: 0 -30px 0 40px;
   text-align: center;
   font-weight: 200;
