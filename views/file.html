@@ -10,7 +10,7 @@
     <iframe src="{{ file.previewPath }}"></iframe>
   </div>
   <p class="date">{{ file.pubdate | date}} </p>
-  <div class="rating">
+  <div class="fileButtons">
     <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
     <p class="download" ng-click="downloadFile()"> ->] </p>
   </div>

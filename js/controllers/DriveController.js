@@ -1,6 +1,6 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
-  $scope.bandName = "Enter"
+  $scope.loadButton = "Enter";
   // Folders
   $scope.folders = [];
   $scope.folderName = "";
@@ -40,7 +40,6 @@ function($scope, $sce) {
     var file = $scope.files[index];
     $scope.safeApply(function(index) {
       $scope.file = file;
-      $scope.recentFiles.push(file);
     });
     hidePreviousFile();
     loadFile(file);

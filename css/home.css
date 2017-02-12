@@ -85,7 +85,8 @@ html, body {
 }
 
 .file:hover, .folder:hover {
-  background-color: #f1f1f1;
+  background-color: rgba(51, 122, 183, 0.13);
+  transition: background 500ms;
 }
 
 #audio {
@@ -131,7 +132,7 @@ html, body {
   position: relative;
 }
 
-#file .rating {
+#file .fileButtons {
   margin-right: 30px;
   margin-bottom: 5px;
 }
@@ -188,7 +189,7 @@ html, body {
   font-weight: 200;
 }
 
-.rating {
+.fileButtons {
   text-align: right;
   -webkit-user-select: none;
     -moz-user-select: none;
@@ -213,21 +214,22 @@ html, body {
   transition: background 500ms;
 }
 
-.close {
-  background: lightgrey;
-  color: #000;
+.closeFile {
+  background: #4285f4;
+  color: #d6d6d6;
   cursor: pointer;
   display: inline-block;
   font-size: 19px;
   line-height: 30px;
   min-width: 30px;
-  height: 30px;
+  height: 33px;
   border-radius: 5%;
   margin: 0 5px 0 40px;
   text-align: center;
   font-weight: 400;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: background 500ms;
+  float: right;
 }
 
 .download {
@@ -247,11 +249,28 @@ html, body {
   transition: background 500ms;
 }
 
-.likes:hover,
-.download:hover,
-.close:hover {
+.download:hover {
   color: #F65A5B;
   background: rgba(246, 90, 91, 0.25);
+  transition: background 500ms;
+}
+
+.closeFile:hover {
+  color: #343434;
+  background: rgba(68, 142, 255, 0.59);
+  transition: background 500ms;
+}
+
+.likes:hover {
+  color: #2c7044;
+  background: rgba(5, 246, 66, 0.25);
+  transition: background 500ms;
+}
+
+.likes:active,
+.download:active,
+.closeFile:active {
+  background: white;
   transition: background 500ms;
 }
 
