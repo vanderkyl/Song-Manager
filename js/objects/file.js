@@ -1,29 +1,4 @@
 var previousFiles = [];
-/*
-function loadDisqus(file) {
-  DISQUS.reset({
-    reload: true,
-    config: function () {
-      var id = file.id;
-      console.log(id);
-      this.page.identifier = id;
-      this.page.url = "http://kylevanderhoof.com/disqus/" + id;
-      this.page.title = file.name;
-    }
-  });
-}*/
-function loadDisqus(file) {
-  DISQUS.reset({
-    reload: true,
-    config: function () {
-      var id = file.id;
-      console.log(id);
-      this.page.identifier = id;
-      this.page.url = "http://kylevanderhoof.com/disqus?id=" + id;
-      this.page.title = file.name;
-    }
-  });
-}
 
 function loadFile(file) {
   switch(file.type) {
