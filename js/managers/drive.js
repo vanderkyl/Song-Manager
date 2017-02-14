@@ -4,6 +4,7 @@ var CLIENT_ID = '528197877151-u6dq0rnndrkjcsflhfc7550dnleu9vju.apps.googleuserco
 var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 var FILE_LIST = [];
+var CURRENT_FILE_LIST = [];
 //var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
 var FOLDER_ID = "0BysYdC4iJkFUb1Rpbm1ySFNFNEE";
 var URL = "http://video.vanderhoof.com:8080/#/drive-audio";
@@ -32,13 +33,14 @@ var TEST_FILE = [
  * Check if current user has authorized this application.
  */
 function checkAuth() {
+    console.log("Checking authorization...");
   gapi.client.setApiKey(API_KEY);
   gapi.auth.authorize(
-    {
-      'client_id': CLIENT_ID,
-      'scope': SCOPES.join(' '),
-      'immediate': true
-    }, handleAuthResult);
+      {
+          'client_id': CLIENT_ID,
+          'scope': SCOPES.join(' '),
+          'immediate': true
+      }, handleAuthResult);
 }
 
 /**
@@ -78,8 +80,8 @@ function displayFiles(response) {
   console.log(response);
   if (FILE_LIST.length == 0) {
     FILE_LIST = response;
-    document.getElementById('loading').style.display = "none";
-    document.getElementById("loadSongs").style.display = "block";
+   document.getElementById('loading').style.display = "none";
+   document.getElementById("loadSongs").style.display = "block";
   } else {
     FILE_LIST = response;
     filesReady = true;
@@ -156,6 +158,10 @@ function loadTestFiles() {
 function loadDriveApi() {
   console.log("Loading files from Google Drive...");
   gapi.client.load('drive', 'v2', loadFiles);
+}
+
+function saveCurrentFileList() {
+    CURRENT_FILE_LIST = FILE_LIST;
 }
 
 function printOutput(response) {

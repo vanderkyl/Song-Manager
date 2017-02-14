@@ -62,10 +62,8 @@ function checkFile(file, addFolder, addFile) {
   //console.log("Checking...");
   if (file.explicitlyTrashed == false) {
     if (file.mimeType == "application/vnd.google-apps.folder") {
-      //console.log("Adding Folder [" + file.title + "]");
       addFolder(file);
     } else {
-      //console.log("Adding File [" + file.title + "]");
       addFile(file);
     }
   }

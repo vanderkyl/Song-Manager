@@ -1,17 +1,4 @@
-<div id="authorize-div" >
-  <div id="system" class="container">
-    <!--Button for the user to click to initiate auth sequence -->
-    <div id="sun" class="driveSun" onclick="handleAuthClick(event);"><p><strong>LOG IN</strong></p></div>
-      <div id="earth-orbit">
-        <!-- Insert the 'earth' on the next line -->
-        <div id="earth"></div>
-          <div id="moon-orbit">
-            <div id="moon"></div>
-          </div>
-        </div>
-  </div>
-  <input id="test-button" type="button" value="Run Test" onclick="loadTestFiles();"/>
-</div>
+<!-- Loading Animation -->
 <div id="loading">
   <div id="system" class="container">
     <div id="sun"><p><strong>LOADING</strong></p></div>
@@ -24,12 +11,16 @@
      </div>
   </div>
 </div>
-<div id="output" ng-controller="DriveController">
-  <h2>{{ title }}</h2>
-  <div class="col-md-12">
-    <div id="loadSongs" class="thumbnail" ng-click="getFiles();">
-      <p class="title">{{ loadButton }}</p>
-    </div>
+<div>
+<!-- Login to Google Drive -->
+<div id="authorize-div" class="col-md-12">
+  <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
+    <p class="title folderTitle">{{ loginMessage }}</p>
+  </div>
+</div>
+
+  <div id="loadSongs" class="thumbnail folder" ng-click="getFiles();">
+    <p class="title folderTitle">Enter</p>
   </div>
   <div class="container">
     <div ng-repeat="folder in folders" class="col-md-6">

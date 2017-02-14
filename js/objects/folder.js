@@ -1,4 +1,6 @@
 var PREVIOUS_FOLDER_BUTTON = "PREV_BUTTON";
+var PREVIOUS_FOLDER = [];
+var RECENT_FOLDER = {};
 
 function getFolder(folder) {
   var folderObject = {
@@ -10,7 +12,7 @@ function getFolder(folder) {
 
 function getPreviousButton() {
   var button = {
-    name: "Back To Previous Folder",
+    name: "GO BACK",
     id: PREVIOUS_FOLDER_BUTTON
   };
   return button;
@@ -32,19 +34,19 @@ function folderIsCached(folderId, recentFiles) {
   return isFolderCached;
 }
 
-function loadFolder(folderId, previousFiles, recentFiles, loadFiles, getFiles, wait) {
+function loadFolder(folderId, loadFiles, getFiles, wait) {
   if (requestingPreviousFolder(folderId)) {
     hidePreviousFile();
-    FILE_LIST = previousFiles.pop();
+    FILE_LIST = PREVIOUS_FOLDER.pop();
     getFiles();
-  } else if (folderIsCached(folderId, recentFiles)) {
-    previousFiles.push(FILE_LIST);
-    listCachedFiles(folderId, recentFiles);
+  } else if (folderIsCached(folderId, RECENT_FOLDER)) {
+    PREVIOUS_FOLDER.push(FILE_LIST);
+    listCachedFiles(folderId, RECENT_FOLDER);
     wait(loadFiles);
   } else {
     document.getElementById('loading').style.display = "block";
-    previousFiles.push(FILE_LIST);
-    listFiles(folderId, recentFiles);
+    PREVIOUS_FOLDER.push(FILE_LIST);
+    listFiles(folderId, RECENT_FOLDER);
     console.log("Files are loading. Please wait...");
     wait(loadFiles);
   }

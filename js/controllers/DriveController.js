@@ -1,6 +1,6 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
-  $scope.loadButton = "Enter";
+  $scope.loginMessage = "Logging In";
   // Folders
   $scope.folders = [];
   $scope.folderName = "";
@@ -8,8 +8,6 @@ function($scope, $sce) {
   $scope.files = [];
   $scope.file = {};
   //TODO Create functionality for a recent file selection
-  $scope.recentFiles = {};
-  $scope.previousFiles = [];
 
   $scope.addFolder = function(folder) {
     $scope.safeApply(function() {
@@ -29,8 +27,6 @@ function($scope, $sce) {
     $scope.folderName = folder.name;
     $scope.clearFilesAndFolders();
     loadFolder(folderId,
-      $scope.previousFiles,
-      $scope.recentFiles,
       $scope.loadFiles,
       $scope.getFiles,
       $scope.waitUntilFilesAreLoaded);
@@ -71,10 +67,11 @@ function($scope, $sce) {
 
   // Go through the files that were saved from the Google Api Call
   $scope.getFiles = function() {
-    if ($scope.previousFiles.length > 0) {
+    console.log("Getting Files");
+    if (PREVIOUS_FOLDER.length > 0) {
       $scope.addPreviousButton();
     }
-    sortFiles($scope.addFolder, $scope.addFile, $scope.previousFiles);
+    sortFiles($scope.addFolder, $scope.addFile);
   };
 
   // Add button to go back to previous folder contents
@@ -119,4 +116,18 @@ function($scope, $sce) {
       this.$apply(fn);
     }
   };
+  //TODO remove log in button when reentering
+  // If a folder is already open get the files, else log in.
+  if (FILE_LIST.length != 0) {
+    $scope.getFiles();
+    document.getElementById("authorize-div").style.display = "none";
+  } else {
+    try {
+      checkAuth();
+    } catch (err) {
+      $scope.loginMessage = "Log In";
+      console.log("Authorization failed. Please log in.");
+    }
+  }
 }]);
+
