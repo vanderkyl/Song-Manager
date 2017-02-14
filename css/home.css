@@ -148,6 +148,18 @@ html, body {
   display: none;
 }
 
+#loginButton {
+  cursor: pointer;
+  cursor: hand;
+  border: 0px;
+  position: relative;
+  padding: 50px;
+  border-radius: 0;
+  margin-bottom: 50px;
+  text-align: center;
+  display: block;
+}
+
 #loadDisqus {
   cursor: pointer;
   cursor: hand;
