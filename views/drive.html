@@ -1,27 +1,18 @@
-<!-- Loading Animation -->
-<div id="loading">
-  <div id="system" class="container">
-    <div id="sun"><p><strong>LOADING</strong></p></div>
-      <div id="earth-orbit">
-        <!-- Insert the 'earth' on the next line -->
-        <div id="earth"></div>
-        <div id="moon-orbit">
-          <div id="moon"></div>
-        </div>
-     </div>
-  </div>
-</div>
 <div>
-<!-- Login to Google Drive -->
-<div id="authorize-div" class="col-md-12">
-  <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
-    <p class="title folderTitle">{{ loginMessage }}</p>
-  </div>
-</div>
+  <!-- Loading Animation -->
+  <loading></loading>
 
+  <!-- Login to Google Drive -->
+  <div id="authorize-div" class="col-md-12">
+    <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
+      <p class="title folderTitle">{{ loginMessage }}</p>
+    </div>
+  </div>
+  <!-- Button to load initial folder -->
   <div id="loadSongs" class="thumbnail folder" ng-click="getFiles();">
     <p class="title folderTitle">Enter</p>
   </div>
+  <!-- Container that holds all folders -->
   <div class="container">
     <div ng-repeat="folder in folders" class="col-md-6">
       <div class="thumbnail folder" ng-click="openFolder($index)">
@@ -30,7 +21,7 @@
     </div>
   </div>
   <hr>
-
+  <!-- Container that holds an opened file -->
   <div id="file" class="container">
     <br><br>
     <p class="closeFile" ng-click="closeFile()"> x </p>
@@ -53,7 +44,7 @@
     <br>
   </div>
   <hr>
-
+  <!-- Container that holds all files -->
   <div id="files" class="container">
     <div ng-repeat="song in files" class="col-md-6">
       <div id="{{ song.id }}" class="thumbnail file" ng-click="openFile($index)">
