@@ -4,9 +4,8 @@
 
   <script>
     function getDriveId() {
-      console.log("Getting parameter: ");
-      fileId = getParameterByName('id');
-      console.log(fileId);
+      var fileId = getParameterByName('id');
+      console.log("Redirecting to this file: " + fileId);
       window.location = "/#/file?id=" + fileId;
     };
   </script>
