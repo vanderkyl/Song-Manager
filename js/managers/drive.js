@@ -4,30 +4,9 @@ var CLIENT_ID = '528197877151-u6dq0rnndrkjcsflhfc7550dnleu9vju.apps.googleuserco
 var API_KEY = 'AIzaSyDK4xg7QanG2KfFp_T4HiuLxl7LGiBvrxI';
 var SCOPES = ['https://www.googleapis.com/auth/drive.metadata.readonly'];
 var FILE_LIST = [];
-var CURRENT_FILE_LIST = [];
-//var FOLDER_ID = "0BysYdC4iJkFUfnNGcHZuclNsc01xMUhfX3AzdGxnX2FEZi12MkZIRDF2emNkaERsWGNWRjQ";
 var FOLDER_ID = "0BysYdC4iJkFUb1Rpbm1ySFNFNEE";
-var URL = "http://video.vanderhoof.com:8080/#/drive-audio";
 var filesReady = false;
 
-//TODO Remove this when finished creating folder and file structure
-var TEST_FILE = [
-  {
-    title: "Test Folder",
-    mimeType: "application/vnd.google-apps.folder",
-    id: "TEST",
-    explicitlyTrashed: false,
-    type: "m4a"
-  },
-  {
-    title: "Test File",
-    mimeType: "file",
-    id: "-123434343",
-    createdDate: "2016-12-02T22:31:21.487Z",
-    webContentLink: "https://drive.google.com/uc?id=0BysYdC4iJkFUU1NrajVZR0YzVWs&export=download",
-    explicitlyTrashed: false
-  }
-];
 
 /**
  * Check if current user has authorized this application.
@@ -64,6 +43,22 @@ function handleAuthResult(authResult) {
 }
 
 /**
+ * Load Drive API client library.
+ */
+function loadDriveApi() {
+    console.log("Loading files from Google Drive...");
+    gapi.client.load('drive', 'v2', loadFiles);
+}
+
+/**
+ * Load the list of files retrieved from Google Drive.
+ * The false parameter is stating that there is no cache ready.
+ */
+function loadFiles() {
+    listFiles(FOLDER_ID, false);
+}
+
+/**
  * Initiate auth flow in response to user clicking authorize button.
  *
  * @param {Event} event Button click event.
@@ -75,7 +70,9 @@ function handleAuthClick(event) {
   return false;
 }
 
-// Store and display files and folders
+/**
+ * Store and display files and folders
+ */
 function displayFiles(response) {
   console.log(response);
   if (FILE_LIST.length == 0) {
@@ -108,13 +105,10 @@ function printFile(fileId) {
 /**
  * Retrieve a list of File resources.
  *
- * @param {Function} callback Function to call when the request is complete.
+ * @param {String} folderId The Google Drive id for a folder
+ * @param {Object} recentFiles A map that holds the file list for recently visited folders
  */
 function listFiles(folderId, recentFiles) {
-  //TODO Take the test portion out when finished.
-  if (folderId == "TEST") {
-    displayFiles(TEST_FILE);
-  } else {
     var retrievePageOfFiles = function(request, result) {
       request.execute(function(resp) {
         result = result.concat(resp.items);
@@ -136,32 +130,17 @@ function listFiles(folderId, recentFiles) {
       q: "'" + folderId + "' in parents"
     });
     return retrievePageOfFiles(initialRequest, []);
-  }
 }
 
+/**
+ * Reloads a recently viewed folder of files.
+ *
+ * @param {String} folderId The Google Drive id for a folder
+ * @param {Object} recentFiles A map that holds the file list for recently visited folders
+ */
 function listCachedFiles(folderId, recentFiles) {
     console.log("Loading cached files from folder: " + folderId);
     displayFiles(recentFiles[folderId]);
-}
-
-function loadFiles() {
-  listFiles(FOLDER_ID, false);
-}
-
-function loadTestFiles() {
-  document.getElementById('authorize-div').style.display = "none";
-  listFiles("TEST", false);
-}
-/**
- * Load Drive API client library.
- */
-function loadDriveApi() {
-  console.log("Loading files from Google Drive...");
-  gapi.client.load('drive', 'v2', loadFiles);
-}
-
-function saveCurrentFileList() {
-    CURRENT_FILE_LIST = FILE_LIST;
 }
 
 function printOutput(response) {
