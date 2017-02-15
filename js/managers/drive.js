@@ -108,7 +108,7 @@ function printFile(fileId) {
  *
  * @param {Function} callback Function to call when the request is complete.
  */
-function listFiles(folderId) {
+function listFiles(folderId, recentFiles) {
   //TODO Take the test portion out when finished.
   if (folderId == "TEST") {
     displayFiles(TEST_FILE);
@@ -123,6 +123,9 @@ function listFiles(folderId) {
           })
           retrievePageOfFiles(request, result);
         } else {
+          if (recentFiles) {
+            cacheFolder(folderId, recentFiles, result);
+          }
           displayFiles(result);
         }
       });
@@ -134,13 +137,18 @@ function listFiles(folderId) {
   }
 }
 
+function listCachedFiles(folderId, recentFiles) {
+    console.log("Loading cached files from folder: " + folderId);
+    displayFiles(recentFiles[folderId]);
+}
+
 function loadFiles() {
-  listFiles(FOLDER_ID);
+  listFiles(FOLDER_ID, false);
 }
 
 function loadTestFiles() {
   document.getElementById('authorize-div').style.display = "none";
-  listFiles("TEST");
+  listFiles("TEST", false);
 }
 /**
  * Load Drive API client library.

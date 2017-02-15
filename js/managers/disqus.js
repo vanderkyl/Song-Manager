@@ -15,6 +15,20 @@ var disqus_config = function () {
   (d.head || d.body).appendChild(s);
 })();
 */
+
+function loadDisqus(file) {
+  DISQUS.reset({
+      reload: true,
+      config: function () {
+          var id = file.id;
+          console.log(id);
+          this.page.identifier = id;
+          this.page.url = "http://kylevanderhoof.com/disqus?id=" + id;
+          this.page.title = file.name;
+      }
+  });
+}
+
 var disqus_config = function () {
   this.page.url = "http://kylevanderhoof.com/";
   this.page.identifier = "HOME_PAGE";

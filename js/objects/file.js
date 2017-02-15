@@ -1,29 +1,4 @@
 var previousFiles = [];
-/*
-function loadDisqus(file) {
-  DISQUS.reset({
-    reload: true,
-    config: function () {
-      var id = file.id;
-      console.log(id);
-      this.page.identifier = id;
-      this.page.url = "http://kylevanderhoof.com/disqus/" + id;
-      this.page.title = file.name;
-    }
-  });
-}*/
-function loadDisqus(file) {
-  DISQUS.reset({
-    reload: true,
-    config: function () {
-      var id = file.id;
-      console.log(id);
-      this.page.identifier = id;
-      this.page.url = "http://kylevanderhoof.com/disqus?id=" + id;
-      this.page.title = file.name;
-    }
-  });
-}
 
 function loadFile(file) {
   switch(file.type) {
@@ -41,10 +16,10 @@ function loadFile(file) {
 function loadFilePage(file) {
   switch(file.type) {
     case "m4a":
-      document.getElementById("videoId") = "none";
+      document.getElementById("videoId").style.display = "none";
       break;
     case "MP4":
-      document.getElementById("audioId") = "none";
+      document.getElementById("audioId").style.display = "none";
       break;
     default:
   }
@@ -84,13 +59,13 @@ function hidePreviousFile() {
 
 // Check if the "file" is a true file or a folder
 function checkFile(file, addFolder, addFile) {
-  console.log("Checking...");
+  //console.log("Checking...");
   if (file.explicitlyTrashed == false) {
     if (file.mimeType == "application/vnd.google-apps.folder") {
-      console.log("Adding Folder [" + file.title + "]");
+      //console.log("Adding Folder [" + file.title + "]");
       addFolder(file);
     } else {
-      console.log("Adding File [" + file.title + "]");
+      //console.log("Adding File [" + file.title + "]");
       addFile(file);
     }
   }

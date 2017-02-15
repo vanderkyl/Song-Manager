@@ -28,7 +28,7 @@
   <h2>{{ title }}</h2>
   <div class="col-md-12">
     <div id="loadSongs" class="thumbnail" ng-click="getFiles();">
-      <p class="title">{{ bandName }}</p>
+      <p class="title">{{ loadButton }}</p>
     </div>
   </div>
   <div class="container">
@@ -42,10 +42,10 @@
 
   <div id="file" class="container">
     <br><br>
-    <p class="close" ng-click="closeFile()"> x </p>
+    <p class="closeFile" ng-click="closeFile()"> x </p>
     <p class="fileTitle">{{ file.name }}</p>
     <br><br>
-    <audio id="audio" style="width: relative;" preload="auto" controls>
+    <audio id="audio" preload="auto" controls>
       <source id="m4aSource" ng-src="{{ file.path }}" type="audio/mp4" />
       <p>Your browser does not support HTML5 audio.</p>
     </audio>
@@ -53,7 +53,7 @@
       <iframe src="{{ file.previewPath }}"></iframe>
     </div>
     <p class="date">{{ file.pubdate | date}} </p>
-    <div class="rating">
+    <div class="fileButtons">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
       <p class="download" ng-click="downloadFile()"> ->] </p>
     </div>
@@ -68,7 +68,7 @@
       <div id="{{ song.id }}" class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
         <p class="date">{{ song.pubdate | date}} </p>
-        <div class="rating">
+        <div class="fileButtons">
           <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
           <p class="download" ng-click="download($index)"> ->] </p>
         </div>

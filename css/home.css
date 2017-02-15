@@ -2,7 +2,7 @@ html, body {
   background: #F5F5F5;
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Century Gothic', sans-serif;
   width:100%;
 }
 
@@ -30,7 +30,6 @@ html, body {
 .main {
   background-color: #f2f2f2;
   padding: 50px 0;
-  font-family: 'Montserrat', sans-serif
 }
 
 .main h1 {
@@ -85,7 +84,8 @@ html, body {
 }
 
 .file:hover, .folder:hover {
-  background-color: #f1f1f1;
+  background-color: rgba(51, 122, 183, 0.13);
+  transition: background 500ms;
 }
 
 #audio {
@@ -131,7 +131,7 @@ html, body {
   position: relative;
 }
 
-#file .rating {
+#file .fileButtons {
   margin-right: 30px;
   margin-bottom: 5px;
 }
@@ -170,9 +170,21 @@ html, body {
 .folderTitle {
   color: #444;
   margin: 0;
-  font-size: 24px;
-  font-weight: 800;
+  font-size: 38px;
   text-align: center;
+}
+
+.folder:hover .folderTitle {
+  color: black;
+  text-shadow: 1px 1px #0f0f0f;
+}
+
+.folder:active {
+  background-color: rgba(20, 54, 81, 0.66);
+}
+
+.folder:active .folderTitle {
+  color: white;
 }
 
 .fileTitle {
@@ -188,7 +200,7 @@ html, body {
   font-weight: 200;
 }
 
-.rating {
+.fileButtons {
   text-align: right;
   -webkit-user-select: none;
     -moz-user-select: none;
@@ -205,7 +217,7 @@ html, body {
   line-height: 50px;
   min-width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 5%;
   margin: 0 -30px 0 40px;
   text-align: center;
   font-weight: 200;
@@ -213,21 +225,22 @@ html, body {
   transition: background 500ms;
 }
 
-.close {
-  background: lightgrey;
-  color: #000;
+.closeFile {
+  background: #4285f4;
+  color: #d6d6d6;
   cursor: pointer;
   display: inline-block;
   font-size: 19px;
   line-height: 30px;
   min-width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  height: 33px;
+  border-radius: 5%;
   margin: 0 5px 0 40px;
   text-align: center;
   font-weight: 400;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
   transition: background 500ms;
+  float: right;
 }
 
 .download {
@@ -239,7 +252,7 @@ html, body {
   line-height: 50px;
   min-width: 50px;
   height: 50px;
-  border-radius: 50%;
+  border-radius: 5%;
   margin: 0 -30px 0 40px;
   text-align: center;
   font-weight: 200;
@@ -247,11 +260,28 @@ html, body {
   transition: background 500ms;
 }
 
-.likes:hover,
-.download:hover,
-.close:hover {
+.download:hover {
   color: #F65A5B;
   background: rgba(246, 90, 91, 0.25);
+  transition: background 500ms;
+}
+
+.closeFile:hover {
+  color: #343434;
+  background: rgba(68, 142, 255, 0.59);
+  transition: background 500ms;
+}
+
+.likes:hover {
+  color: #2c7044;
+  background: rgba(5, 246, 66, 0.25);
+  transition: background 500ms;
+}
+
+.likes:active,
+.download:active,
+.closeFile:active {
+  background: white;
   transition: background 500ms;
 }
 
