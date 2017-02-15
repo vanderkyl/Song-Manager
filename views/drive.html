@@ -43,7 +43,7 @@
     <div id="video">
       <iframe src="{{ file.previewPath }}"></iframe>
     </div>
-    <p class="date">{{ file.pubdate | date}} </p>
+    <p class="fileSize">{{ file.size }}</p>
     <div class="fileButtons">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
       <p class="download" ng-click="downloadFile()"> ->] </p>
@@ -58,7 +58,7 @@
     <div ng-repeat="song in files" class="col-md-6">
       <div id="{{ song.id }}" class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
-        <p class="date">{{ song.pubdate | date}} </p>
+        <p class="fileSize">{{ song.size }}</p>
         <div class="fileButtons">
           <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
           <p class="download" ng-click="download($index)"> ->] </p>

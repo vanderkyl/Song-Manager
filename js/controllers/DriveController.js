@@ -62,7 +62,7 @@ function($scope, $sce) {
   };
 
   $scope.downloadFile = function() {
-    window.location = $scope.files[index].path;
+    window.location = $scope.file.path;
   };
 
   // Go through the files that were saved from the Google Api Call

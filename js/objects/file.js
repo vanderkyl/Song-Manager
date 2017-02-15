@@ -80,19 +80,40 @@ function sortFiles(addFolder, addFile) {
 }
 
 function getLikes(fileId) {
-  console.log(fileId);
   var likesId = "likes-" + fileId;
   var fileLikes = localStorage.getItem(likesId);
-  console.log(fileLikes);
   if (fileLikes === null) {
     localStorage.setItem(likesId, 0);
     var likes = parseInt(localStorage.getItem(likesId));
-    console.log(likes);
-    console.log(Number.isInteger(likes));
     return likes;
   } else {
     return fileLikes;
   }
+}
+
+function roundToTwoDecimals(num) {
+  return Math.round(num * 100) / 100;
+}
+
+function calculateFileSize (bytes) {
+  var kiloByte = 1024;
+  var megaByte = 1048576;
+  var gigaByte = 1073741824;
+  var fileSize = bytes;
+  if (bytes < kiloByte) {
+    fileSize += " bytes";
+  } else if (bytes < megaByte) {
+    fileSize = roundToTwoDecimals(bytes/kiloByte) + " KB";
+  } else if (bytes < gigaByte) {
+    fileSize = roundToTwoDecimals(bytes/megaByte) + " MB";
+  } else {
+    fileSize = roundToTwoDecimals(bytes/gigaByte) + " GB";
+  }
+  return fileSize;
+}
+
+function getFileSize (file) {
+  return calculateFileSize(parseInt(file.fileSize));
 }
 
 function getFile(newFile, $sce) {
@@ -103,10 +124,8 @@ function getFile(newFile, $sce) {
     path: $sce.trustAsResourceUrl(newFile.webContentLink),
     previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
     type: newFile.fileExtension,
-    pubdate: newFile.createdDate,
+    size: getFileSize(newFile),
     likes: getLikes(newFile.id),
-    comment: "Nothing",
-    index: files.length,
     timestamps: []
   };
   return fileObject;
