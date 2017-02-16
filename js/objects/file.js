@@ -95,10 +95,11 @@ function roundToTwoDecimals(num) {
   return Math.round(num * 100) / 100;
 }
 
-function calculateFileSize (bytes) {
+function calculateFileSize (file) {
   var kiloByte = 1024;
   var megaByte = 1048576;
   var gigaByte = 1073741824;
+  var bytes =  parseInt(file.fileSize);
   var fileSize = bytes;
   if (bytes < kiloByte) {
     fileSize += " bytes";
@@ -112,10 +113,6 @@ function calculateFileSize (bytes) {
   return fileSize;
 }
 
-function getFileSize (file) {
-  return calculateFileSize(parseInt(file.fileSize));
-}
-
 function getFile(newFile, $sce) {
   var fileId = newFile.id;
   var fileObject = {
@@ -124,7 +121,8 @@ function getFile(newFile, $sce) {
     path: $sce.trustAsResourceUrl(newFile.webContentLink),
     previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
     type: newFile.fileExtension,
-    size: getFileSize(newFile),
+    size: calculateFileSize(newFile),
+    bytes: newFile.fileSize,
     likes: getLikes(newFile.id),
     timestamps: []
   };

@@ -52,18 +52,31 @@ function($scope, $sce) {
 
   // Add like on file button
   $scope.plusOne = function(index) {
+    // Keeps this from adding twice
     stopPropogation();
     saveLike($scope.files[index]);
   };
 
   $scope.download = function(index) {
+    // Keeps this from downloading twice.
     stopPropogation();
-    window.location = $scope.files[index].path;
+    $scope.downloadFile($scope.files[index]);
   };
 
-  $scope.downloadFile = function() {
-    window.location = $scope.file.path;
+  $scope.downloadFromFile = function() {
+    $scope.downloadFile($scope.file);
   };
+
+  $scope.downloadFile = function(file) {
+    // Check if file is greater than 25 MB
+    if (file.bytes > 26214400) {
+        console.log(file.bytes);
+        var win = window.open(file.path, '_blank');
+        win.focus();
+    } else {
+        window.location = file.path;
+    }
+  }
 
   // Go through the files that were saved from the Google Api Call
   $scope.getFiles = function() {
@@ -91,7 +104,8 @@ function($scope, $sce) {
     if (filesReady) {
       $scope.loadFiles();
     } else {
-      setTimeout($scope.waitUntilFilesAreLoaded, 2000);
+      // TODO use a promise instead of a wait loop. This is dangerous
+      setTimeout($scope.waitUntilFilesAreLoaded, 500);
     }
   };
 
