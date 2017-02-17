@@ -64,6 +64,30 @@ html, body {
   text-align: center;
 }
 
+.player {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  position: relative;
+  border-radius: 10px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+.player:hover {
+  background-color: #ddd;
+  transition: background 50ms;
+}
+
+#audioPlayer {
+  text-align: center;
+  position: fixed;
+  z-index: 1000;
+  width: 50%;
+  height: 60px;
+  margin-left: 17%;
+  display: none;
+}
+
 .thumbnail {
   border: 0px;
   position: relative;

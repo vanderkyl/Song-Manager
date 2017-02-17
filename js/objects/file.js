@@ -36,15 +36,33 @@ function loadVideo(file) {
 
 function loadAudio(file) {
   var audio = document.getElementById("audio");
+  var audioPlayer = document.getElementById("audioPlayer");
   var fileDiv = document.getElementById("file");
   $('#file').scrollView();
+  audioPlayer.style.display = "none";
   fileDiv.style.display = "block";
   audio.style.display = "block";
   audio.load();
   audio.play();
 }
 
+function playAudio() {
+  var audio = document.getElementById("audio");
+  audio.play();
+}
+
+function pauseAudio() {
+    var audio = document.getElementById("audio");
+    audio.pause();
+}
+
+function checkTime() {
+    var audio = document.getElementById("audio");
+    alert(audio.currentTime);
+}
+
 function closeFile(id) {
+  checkIfAudioIsPlaying();
   hidePreviousFile();
   var fileId = "#" + id;
   $(fileId).scrollView();
@@ -95,11 +113,10 @@ function roundToTwoDecimals(num) {
   return Math.round(num * 100) / 100;
 }
 
-function calculateFileSize (file) {
+function calculateFileSize (bytes) {
   var kiloByte = 1024;
   var megaByte = 1048576;
   var gigaByte = 1073741824;
-  var bytes =  parseInt(file.fileSize);
   var fileSize = bytes;
   if (bytes < kiloByte) {
     fileSize += " bytes";
@@ -113,6 +130,10 @@ function calculateFileSize (file) {
   return fileSize;
 }
 
+function getFileSize (file) {
+  return calculateFileSize(parseInt(file.fileSize));
+}
+
 function getFile(newFile, $sce) {
   var fileId = newFile.id;
   var fileObject = {
@@ -121,8 +142,7 @@ function getFile(newFile, $sce) {
     path: $sce.trustAsResourceUrl(newFile.webContentLink),
     previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
     type: newFile.fileExtension,
-    size: calculateFileSize(newFile),
-    bytes: newFile.fileSize,
+    size: getFileSize(newFile),
     likes: getLikes(newFile.id),
     timestamps: []
   };

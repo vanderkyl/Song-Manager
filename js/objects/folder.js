@@ -35,6 +35,7 @@ function folderIsCached(folderId, recentFiles) {
 }
 
 function loadFolder(folderId, loadFiles, getFiles, wait) {
+  checkIfAudioIsPlaying();
   if (requestingPreviousFolder(folderId)) {
     hidePreviousFile();
     FILE_LIST = PREVIOUS_FOLDER.pop();
