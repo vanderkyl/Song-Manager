@@ -21,6 +21,10 @@ app.config(function ($routeProvider) {
     controller: 'DriveController',
     templateUrl: 'views/file.html'
   })
+  .when('/comment', {
+      controller: 'CommentController',
+      templateUrl: 'views/comment.html'
+  })
   .otherwise({
     redirectTo: '/'
   });
