@@ -29,7 +29,7 @@ function loadFilePage(file) {
 function loadVideo(file) {
   var video = document.getElementById("video");
   var fileDiv = document.getElementById("file");
-  $('#file').scrollView();
+  $('#files').scrollView();
   fileDiv.style.display = "block";
   video.style.display = "block";
 }
@@ -37,7 +37,7 @@ function loadVideo(file) {
 function loadAudio(file) {
   var audio = document.getElementById("audio");
   var fileDiv = document.getElementById("file");
-  $('#file').scrollView();
+  $('#files').scrollView();
   fileDiv.style.display = "block";
   audio.style.display = "block";
   audio.load();

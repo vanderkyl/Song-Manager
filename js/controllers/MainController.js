@@ -6,6 +6,6 @@ function($scope) {
     window.location = "/#/drive-audio";
   };
   $scope.navigateToComments = function() {
-      window.location = "/#/comments";
+      window.location = "/#/comment";
   };
 }]);
