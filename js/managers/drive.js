@@ -64,10 +64,15 @@ function loadFiles() {
  * @param {Event} event Button click event.
  */
 function handleAuthClick(event) {
-  gapi.auth.authorize(
-    {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-    handleAuthResult);
-  return false;
+  try {
+      gapi.auth.authorize(
+          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+          handleAuthResult);
+      return false;
+  } catch (err) {
+      console.log(err);
+  }
+
 }
 
 /**

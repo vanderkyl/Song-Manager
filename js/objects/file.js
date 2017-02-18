@@ -61,6 +61,12 @@ function checkTime() {
     alert(audio.currentTime);
 }
 
+function quitPlayer() {
+  var audio = document.getElementById("audio");
+  audio.pause();
+  document.getElementById("audioPlayer").style.display = "none";
+}
+
 function closeFile(id) {
   checkIfAudioIsPlaying();
   hidePreviousFile();
