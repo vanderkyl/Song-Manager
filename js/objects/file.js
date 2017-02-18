@@ -94,7 +94,7 @@ function sortFiles(addFolder, addFile) {
   for (var i = 0; i < FILE_LIST.length; i++) {
     checkFile(FILE_LIST[i], addFolder, addFile);
   }
-  document.getElementById('loading').style.display = "none";
+  document.getElementById("loading").style.display = "none";
 }
 
 function getLikes(fileId) {

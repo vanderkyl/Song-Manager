@@ -12,7 +12,7 @@ var filesReady = false;
  * Check if current user has authorized this application.
  */
 function checkAuth() {
-    console.log("Checking authorization...");
+  console.log("Checking authorization...");
   gapi.client.setApiKey(API_KEY);
   gapi.auth.authorize(
       {

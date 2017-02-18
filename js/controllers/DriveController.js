@@ -119,7 +119,7 @@ function($scope, $sce) {
     document.getElementById("file").style.display = "none";
   };
 
-  // Safely wait until the digest is funished before applying the ui change
+  // Safely wait until the digest is finished before applying the ui change
   $scope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
     if(phase == '$apply' || phase == '$digest') {
@@ -132,7 +132,7 @@ function($scope, $sce) {
   };
   //TODO remove log in button when reentering
   // If a folder is already open get the files, else log in.
-  if (FILE_LIST.length != 0) {
+  if (FILE_LIST.length !== 0) {
     $scope.getFiles();
     document.getElementById("authorize-div").style.display = "none";
   } else {
