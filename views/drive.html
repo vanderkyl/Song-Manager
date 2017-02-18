@@ -2,13 +2,6 @@
   <!-- Loading Animation -->
   <loading id="loading"></loading>
 
-  <div id="audioPlayer" class="col-md-12">
-    <div id="trackName" class="col-md-12">{{ file.name }}</div>
-    <div id="playButton" class="col-md-4 player" onclick="playAudio();">Play</div>
-    <div id="pauseButton" class="col-md-4 player" onclick="pauseAudio();">Pause</div>
-    <div id="currentTimeButton" class="col-md-4 player" onclick="checkTime();">Check Time</div>
-  </div>
-
   <!-- Login to Google Drive -->
   <div id="authorize-div" class="col-md-12">
     <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
@@ -29,6 +22,12 @@
   </div>
   <hr>
   <!-- Container that holds an opened file -->
+  <div id="audioPlayer" class="col-md-12">
+    <div id="trackName" class="col-md-12">{{ file.name }}</div>
+    <div id="playButton" class="col-md-4 player" onclick="playAudio();">Play</div>
+    <div id="pauseButton" class="col-md-4 player" onclick="pauseAudio();">Pause</div>
+    <div id="currentTimeButton" class="col-md-4 player" onclick="checkTime();">Check Time</div>
+  </div>
   <div id="file" class="container">
     <br><br>
     <p class="closeFile" ng-click="closeFile()"> x </p>

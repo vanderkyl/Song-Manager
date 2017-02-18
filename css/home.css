@@ -92,6 +92,8 @@ html, body {
   border-radius: 10px;
   margin-bottom: 50px;
   text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 .player:hover {
@@ -101,10 +103,10 @@ html, body {
 
 #audioPlayer {
   text-align: center;
-  position: fixed;
+  position: relative;
+  font-size: 16px;
   z-index: 1000;
-  width: 50%;
-  height: 60px;
+  width: 70%;
   margin-left: 17%;
   display: none;
 }
