@@ -87,6 +87,10 @@ function($scope, $sce) {
     sortFiles($scope.addFolder, $scope.addFile);
   };
 
+  $scope.goToFilePage = function() {
+    window.location = "/#/file?id=" + $scope.file.id;
+  }
+
   // Add button to go back to previous folder contents
   $scope.addPreviousButton = function() {
     $scope.safeApply(function() {
