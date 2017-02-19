@@ -19,3 +19,17 @@ function useLightTheme() {
     hideElementById("navTool2");
     displayElementById("navTool1");
 }
+
+function useImageNavTheme() {
+    hideElementById("navRoutes");
+    hideElementById("navTool1");
+    displayElementById("imageNavRoutes");
+    displayElementById("navTool2");
+}
+
+function useTextNavTheme() {
+    hideElementById("imageNavRoutes");
+    hideElementById("navTool2");
+    displayElementById("navRoutes");
+    displayElementById("navTool1");
+}

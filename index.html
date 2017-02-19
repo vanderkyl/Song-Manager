@@ -25,12 +25,17 @@
       <nav class="navbar navbar-default navbar-static-top">
         <ul id="navRoutes" class="nav navbar-nav">
           <li><a href="/#/home">Home</a></li>
-          <li><a href="/#/drive-audio">Song Ideas</a></li>
+          <li><a href="/#/drive-audio">Music</a></li>
           <li><a href="/#/comment">Leave A Comment</a></li>
         </ul>
+        <ul id="imageNavRoutes" class="nav navbar-nav">
+          <li><a href="/#/home"><img src="img/home.png"></a></li>
+          <li><a href="/#/drive-audio"><img src="img/music.png"></a></li>
+          <li><a href="/#/comment"><img src="img/comment.png"></a></li>
+        </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li><div id="navTool1" class="navTools" onclick="useDarkTheme();">Dark Mode</div></li>
-          <li><div id="navTool2" class="navTools" onclick="useLightTheme();">Light Mode</div></li>
+          <li><div id="navTool1" class="navTools" onclick="useImageNavTheme();">Change Nav Theme</div></li>
+          <li><div id="navTool2" class="navTools" onclick="useTextNavTheme();">Change Back</div></li>
         </ul>
       </nav>
     </div>

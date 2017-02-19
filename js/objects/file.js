@@ -59,7 +59,7 @@ function loadAudio(file) {
 function closeFile(id) {
   checkIfAudioIsPlaying();
   hidePreviousFile();
-  scrollToElementById(id);
+  //scrollToElementById(id);
 }
 
 function hidePreviousFile() {
