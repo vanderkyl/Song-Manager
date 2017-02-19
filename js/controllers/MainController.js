@@ -3,10 +3,9 @@ function($scope) {
   $scope.title = 'Idea Manager';
   $scope.message = '';
   $scope.navigateToSongIdeas = function() {
-    window.location = "/#/drive-audio";
+    navigateToURL("/#/drive-audio");
   };
   $scope.navigateToComments = function() {
-    window.location = "/#/comment";
+    navigateToURL("/#/comment");
   };
-
 }]);

@@ -82,8 +82,8 @@ function displayFiles(response) {
   console.log(response);
   if (FILE_LIST.length == 0) {
     FILE_LIST = response;
-   document.getElementById('loading').style.display = "none";
-   document.getElementById("loadSongs").style.display = "block";
+    hideElementById('loading');
+    displayElementById('loadSongs');
   } else {
     FILE_LIST = response;
     filesReady = true;
@@ -146,47 +146,4 @@ function listFiles(folderId, recentFiles) {
 function listCachedFiles(folderId, recentFiles) {
     console.log("Loading cached files from folder: " + folderId);
     displayFiles(recentFiles[folderId]);
-}
-
-function printOutput(response) {
-  //document.getElementById("output").innerText = response.kind;
-  var stringConstructor = "test".constructor;
-  var arrayConstructor = [].constructor;
-  var objectConstructor = {}.constructor;
-
-  function whatIsIt(object) {
-      if (object === null) {
-          return "null";
-      }
-      else if (object === undefined) {
-          return "undefined";
-      }
-      else if (object.constructor === stringConstructor) {
-          return "String";
-      }
-      else if (object.constructor === arrayConstructor) {
-          return "Array";
-      }
-      else if (object.constructor === objectConstructor) {
-          var items = object.result.items;
-          console.log(object);
-          for (var i = 0; i < items.length; i++) {
-            console.log(items[i].selfLink);
-          }
-
-          //angular.element($('output')).scope().createAudioObjects().apply();
-          var res = gapi.client.request('https://www.googleapis.com/drive/v2/files/0BysYdC4iJkFUU1NrajVZR0YzVWs');
-          res.then(function(result) {
-            console.log(result);
-          }, function(reason) {
-            console.log(reason);
-          });
-          //listFiles();
-          return "Object";
-      }
-      else {
-          return "don't know";
-      }
-  }
-  console.log(whatIsIt(response));
 }
