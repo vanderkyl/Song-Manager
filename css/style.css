@@ -1,6 +1,7 @@
 #authorize-div {
     position: relative;
     height: auto;
+    display: none;
 }
 
 #system {

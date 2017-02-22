@@ -137,12 +137,6 @@ html, body {
   margin-bottom: 50px;
 }
 
-.thumbnail img {
-  margin-top: 10px;
-  margin-bottom: 30px;
-  max-width: 100%;
-}
-
 .file, .folder , .homeButton, .navTools {
   cursor: pointer;
   cursor: hand;
@@ -199,6 +193,11 @@ html, body {
 #file .fileButtons {
   margin-right: 30px;
   margin-bottom: 5px;
+}
+
+.fileButtons img {
+  width: 30px;
+  height: 30px;
 }
 
 #loadSongs {
@@ -383,7 +382,7 @@ html, body {
 
 .likes:hover {
   color: #2c7044;
-  background: rgba(5, 246, 66, 0.25);
+  background: rgba(5, 234, 65, 0.09);
   transition: background 500ms;
 }
 

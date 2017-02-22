@@ -18,7 +18,7 @@ app.config(function ($routeProvider) {
     templateUrl: 'views/drive.html'
   })
   .when('/file', {
-    controller: 'DriveController',
+    controller: 'FileController',
     templateUrl: 'views/file.html'
   })
   .when('/comment', {

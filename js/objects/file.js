@@ -1,3 +1,5 @@
+var CURRENT_FILE = {};
+
 function getFile(newFile, $sce) {
     var fileId = newFile.id;
     var fileObject = {
@@ -14,30 +16,48 @@ function getFile(newFile, $sce) {
     return fileObject;
 }
 
-function loadFile(file) {
-  switch(file.type) {
-    case "m4a":
-      loadAudio(file);
-      break;
-    case "MP4":
-      loadVideo(file);
-      break;
-    default:
+function loadFilePage($sce) {
+  var file = CURRENT_FILE;
+  if (file.type === null) {
+    if (file.type === "m4a") {
+        hideElementById("videoId");
+    } else {
+        hideElementById("audioId");
+    }
+  } else {
+    //TODO finish filling out the file properties
+    console.log("Getting file from Google Drive");
+    var fileId = getParameterByName("id");
+      file = {
+          name: fileId,
+          id: fileId,
+          path: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+          previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+          type: "m4a",
+          size: "",
+          bytes: "",
+          likes: getLikes(fileId),
+          timestamps: []
+      };
   }
+  console.log(file);
+  displayElementById("file");
+  hideElementById("authorize-div")
   loadDisqus(file);
+  return file;
 }
 
-function loadFilePage(file) {
-  switch(file.type) {
-    case "m4a":
-      hideElementById("videoId");
-      break;
-    case "MP4":
-      hideElementById("audioId");
-      break;
-    default:
-  }
-  loadDisqus(file);
+function loadFile(file) {
+    switch(file.type) {
+        case "m4a":
+            loadAudio(file);
+            break;
+        case "MP4":
+            loadVideo(file);
+            break;
+        default:
+    }
+    loadDisqus(file);
 }
 
 function loadVideo(file) {

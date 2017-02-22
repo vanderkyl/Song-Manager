@@ -87,6 +87,7 @@ function($scope, $sce) {
 
   $scope.goToFilePage = function() {
     navigateToURL("/#/file?id=" + $scope.file.id);
+    CURRENT_FILE = $scope.file;
   }
 
   // Add button to go back to previous folder contents
@@ -137,8 +138,9 @@ function($scope, $sce) {
   // If a folder is already open get the files, else log in.
   if (FILE_LIST.length !== 0) {
     $scope.getFiles();
-    document.getElementById("authorize-div").style.display = "none";
+    hideElementById("authorize-div");
   } else {
+    displayElementById("authorize-div");
     try {
       checkAuth();
     } catch (err) {

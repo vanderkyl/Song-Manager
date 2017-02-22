@@ -48,6 +48,7 @@ function handleAuthResult(authResult) {
 function loadDriveApi() {
     console.log("Loading files from Google Drive...");
     gapi.client.load('drive', 'v2', loadFiles);
+    //saveItemToLocalStorage("client", gapi.client);
 }
 
 /**
@@ -64,15 +65,14 @@ function loadFiles() {
  * @param {Event} event Button click event.
  */
 function handleAuthClick(event) {
-  try {
-      gapi.auth.authorize(
-          {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
-          handleAuthResult);
-      return false;
-  } catch (err) {
-      console.log(err);
-  }
-
+    try {
+        gapi.auth.authorize(
+            {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
+            handleAuthResult);
+        return false;
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 /**
@@ -95,17 +95,31 @@ function displayFiles(response) {
  * Print a file's metadata.
  *
  * @param {String} fileId ID of the file to print metadata for.
- */
+
 function printFile(fileId) {
-  var request = gapi.client.drive.files.get({
-    'fileId': fileId
-  });
-  request.execute(function(resp) {
-    console.log('Title: ' + resp.title);
-    console.log('Description: ' + resp.description);
-    console.log('MIME type: ' + resp.mimeType);
-  });
-}
+  try {
+      var request = gapi.client.drive.files.get({
+          'fileId': fileId
+      });
+      request.execute(function(resp) {
+          console.log('Title: ' + resp.title);
+          console.log('Description: ' + resp.description);
+          console.log('MIME type: ' + resp.mimeType);
+      });
+  } catch (err) {
+      gapi.client = getItemFromLocalStorage("client");
+      //setTimeout(printFile(fileId), 1500);
+      var request = gapi.client.drive.files.get({
+          'fileId': fileId
+      });
+      request.execute(function(resp) {
+          console.log('Title: ' + resp.title);
+          console.log('Description: ' + resp.description);
+          console.log('MIME type: ' + resp.mimeType);
+      });
+
+  }
+}*/
 
 /**
  * Retrieve a list of File resources.
