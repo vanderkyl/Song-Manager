@@ -52,18 +52,29 @@ function($scope, $sce) {
 
   // Add like on file button
   $scope.plusOne = function(index) {
+    // Keeps this from adding twice
     stopPropogation();
     saveLike($scope.files[index]);
   };
 
   $scope.download = function(index) {
+    // Keeps this from downloading twice.
     stopPropogation();
-    window.location = $scope.files[index].path;
+    $scope.downloadFile($scope.files[index]);
   };
 
-  $scope.downloadFile = function() {
-    window.location = $scope.file.path;
+  $scope.downloadFromFile = function() {
+    $scope.downloadFile($scope.file);
   };
+
+  $scope.downloadFile = function(file) {
+    // Check if file is greater than 25 MB
+    if (file.bytes > 26214400) {
+        openLinkInNewTab(file.path);
+    } else {
+        navigateToURL(file.path);
+    }
+  }
 
   // Go through the files that were saved from the Google Api Call
   $scope.getFiles = function() {
@@ -73,6 +84,10 @@ function($scope, $sce) {
     }
     sortFiles($scope.addFolder, $scope.addFile);
   };
+
+  $scope.goToFilePage = function() {
+    navigateToURL("/#/file?id=" + $scope.file.id);
+  }
 
   // Add button to go back to previous folder contents
   $scope.addPreviousButton = function() {
@@ -91,7 +106,8 @@ function($scope, $sce) {
     if (filesReady) {
       $scope.loadFiles();
     } else {
-      setTimeout($scope.waitUntilFilesAreLoaded, 2000);
+      // TODO use a promise instead of a wait loop. This is dangerous
+      setTimeout($scope.waitUntilFilesAreLoaded, 500);
     }
   };
 
@@ -102,10 +118,10 @@ function($scope, $sce) {
     $scope.folders = [];
     $scope.files = [];
     console.log("Cleared previous folders and files.");
-    document.getElementById("file").style.display = "none";
+    hideElementById("file");
   };
 
-  // Safely wait until the digest is funished before applying the ui change
+  // Safely wait until the digest is finished before applying the ui change
   $scope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
     if(phase == '$apply' || phase == '$digest') {
@@ -116,9 +132,10 @@ function($scope, $sce) {
       this.$apply(fn);
     }
   };
+
   //TODO remove log in button when reentering
   // If a folder is already open get the files, else log in.
-  if (FILE_LIST.length != 0) {
+  if (FILE_LIST.length !== 0) {
     $scope.getFiles();
     document.getElementById("authorize-div").style.display = "none";
   } else {

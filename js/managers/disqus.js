@@ -2,6 +2,10 @@
 *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
 *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
 
+function loadHomeDisqus() {
+
+}
+
 function loadDisqus(file) {
   DISQUS.reset({
       reload: true,
@@ -9,7 +13,7 @@ function loadDisqus(file) {
           var id = file.id;
           console.log("Loading Disqus for this file: " + id);
           this.page.identifier = id;
-          this.page.url = "http://kylevanderhoof.com/disqus?id=" + id;
+          this.page.url = "http://kylevanderhoof.com/disqus.html?id=" + id;
           this.page.title = file.name;
       }
   });
