@@ -128,27 +128,31 @@ function printFile(fileId) {
  * @param {Object} recentFiles A map that holds the file list for recently visited folders
  */
 function listFiles(folderId, recentFiles) {
-    var retrievePageOfFiles = function(request, result) {
-      request.execute(function(resp) {
-        result = result.concat(resp.items);
-        var nextPageToken = resp.nextPageToken;
-        if (nextPageToken) {
-          request = gapi.client.drive.files.list({
-            'pageToken': nextPageToken
-          })
-          retrievePageOfFiles(request, result);
-        } else {
-          if (recentFiles) {
-            cacheFolder(folderId, recentFiles, result);
-          }
-          displayFiles(result);
+    if (folderId == "TEST") {
+        displayFiles(TEST_FILE);
+    } else {
+        var retrievePageOfFiles = function(request, result) {
+            request.execute(function(resp) {
+                result = result.concat(resp.items);
+                var nextPageToken = resp.nextPageToken;
+                if (nextPageToken) {
+                    request = gapi.client.drive.files.list({
+                        'pageToken': nextPageToken
+                    })
+                    retrievePageOfFiles(request, result);
+                } else {
+                    if (recentFiles) {
+                        cacheFolder(folderId, recentFiles, result);
+                    }
+                    displayFiles(result);
+                }
+            });
         }
-      });
+        var initialRequest = gapi.client.drive.files.list({
+            q: "'" + folderId + "' in parents"
+        });
+        return retrievePageOfFiles(initialRequest, []);
     }
-    var initialRequest = gapi.client.drive.files.list({
-      q: "'" + folderId + "' in parents"
-    });
-    return retrievePageOfFiles(initialRequest, []);
 }
 
 /**

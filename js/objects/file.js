@@ -11,6 +11,7 @@ function getFile(newFile, $sce) {
         size: calculateFileSize(newFile.fileSize),
         bytes: newFile.fileSize,
         likes: getLikes(fileId),
+        views: getViews(fileId),
         timestamps: []
     };
     return fileObject;
@@ -37,6 +38,7 @@ function loadFilePage($sce) {
           size: "",
           bytes: "",
           likes: getLikes(fileId),
+          views: getViews(fileId),
           timestamps: []
       };
   }
@@ -48,6 +50,7 @@ function loadFilePage($sce) {
 }
 
 function loadFile(file) {
+    addViewToFile(file);
     switch(file.type) {
         case "m4a":
             loadAudio(file);
@@ -110,20 +113,6 @@ function sortFiles(addFolder, addFile) {
   hideElementById("loading");
 }
 
-function getLikes(fileId) {
-  var likesId = "likes-" + fileId;
-  //var fileLikes = localStorage.getItem(likesId);
-  var fileLikes = getItemFromLocalStorage(likesId);
-  if (fileLikes === null) {
-    saveItemToLocalStorage(likesId, 0);
-    //localStorage.setItem(likesId, 0);
-    var likes = parseInt(getItemFromLocalStorage(likesId));
-    return likes;
-  } else {
-    return fileLikes;
-  }
-}
-
 function roundToTwoDecimals(num) {
   return Math.round(num * 100) / 100;
 }
@@ -146,11 +135,44 @@ function calculateFileSize(bytes) {
 }
 
 function saveLike(file) {
-  var likesId = "likes-" + file.id;
-  var likes = parseInt(getItemFromLocalStorage(likesId));
-  likes += 1;
-  saveItemToLocalStorage(likesId, likes);
-  file.likes = likes;
+    var likesId = "likes-" + file.id;
+    var likes = parseInt(getItemFromLocalStorage(likesId));
+    likes += 1;
+    saveItemToLocalStorage(likesId, likes);
+    file.likes = likes;
+}
+
+function getLikes(fileId) {
+    var likesId = "likes-" + fileId;
+    var fileLikes = getItemFromLocalStorage(likesId);
+    console.log(fileLikes + " likes");
+    if (fileLikes === null) {
+        saveItemToLocalStorage(likesId, 0);
+        return 0;
+    } else {
+        return fileLikes;
+    }
+}
+
+function addViewToFile(file) {
+    var viewsId = "views-" + file.id;
+    var views = parseInt(getItemFromLocalStorage(viewsId));
+    views += 1;
+    saveItemToLocalStorage(viewsId, views);
+    file.views = views;
+}
+
+function getViews(fileId) {
+    var viewsId = "views-" + fileId;
+    var views = getItemFromLocalStorage(viewsId);
+    console.log(views + " views");
+    console.log(fileId + " id")
+    if (views === null) {
+        saveItemToLocalStorage(viewsId, 0);
+        return 0;
+    } else {
+        return views;
+    }
 }
 
 function isTrashed(file) {

@@ -224,6 +224,18 @@ html, body {
   display: block;
 }
 
+#loadTestButton {
+  cursor: pointer;
+  cursor: hand;
+  border: 0px;
+  position: relative;
+  padding: 50px;
+  border-radius: 0;
+  margin-bottom: 50px;
+  text-align: center;
+  display: none;
+}
+
 #driveLogin2 {
   display: none;
 }
@@ -259,7 +271,7 @@ html, body {
 
 .title {
   color: #444;
-  margin: 0;
+  margin-bottom: 30px;
   font-size: 28px;
   font-weight: 200;
 }
@@ -306,6 +318,20 @@ html, body {
   color: #a3a3a3 ;
   font-size: 14px;
   font-weight: 200;
+  text-align: right;
+  width: 102%;
+}
+
+#file .fileSize {
+  padding-right: 2%;
+}
+
+.fileViews {
+  color: #a3a3a3 ;
+  font-size: 20px;
+  font-weight: 200;
+  padding: 0;
+  position: absolute;
 }
 
 .fileButtons {
@@ -313,7 +339,7 @@ html, body {
   -webkit-user-select: none;
     -moz-user-select: none;
      -ms-user-select: none;
-  margin: 30px 0 -30px 20px;
+  margin: 0px 20px -30px 20px;
 }
 
 .likes {

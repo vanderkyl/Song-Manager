@@ -1,6 +1,7 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
   $scope.loginMessage = "Logging In";
+  $scope.testMessage = "Load Test Files";
   // Folders
   $scope.folders = [];
   $scope.folderName = "";
@@ -141,11 +142,16 @@ function($scope, $sce) {
     hideElementById("authorize-div");
   } else {
     displayElementById("authorize-div");
-    try {
-      checkAuth();
-    } catch (err) {
-      $scope.loginMessage = "Log In";
-      console.log("Authorization failed. Please log in.");
+    if (getParameterByName("test") === "true") {
+        console.log(getParameterByName("test"));
+        displayElementById("loadTestButton");
+    } else {
+        try {
+            checkAuth();
+        } catch (err) {
+            $scope.loginMessage = "Log In";
+            console.log("Authorization failed. Please log in.");
+        }
     }
   }
 }]);

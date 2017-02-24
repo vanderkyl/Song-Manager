@@ -7,6 +7,9 @@
     <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
       <p class="title folderTitle">{{ loginMessage }}</p>
     </div>
+    <div id="loadTestButton" class="thumbnail folder" onclick="loadTestFiles();">
+      <p class="title folderTitle">{{ testMessage }}</p>
+    </div>
   </div>
   <!-- Button to load initial folder -->
   <div id="loadSongs" class="thumbnail folder" ng-click="getFiles();">
@@ -40,6 +43,8 @@
     <div id="video">
       <iframe src="{{ file.previewPath }}"></iframe>
     </div>
+    <br>
+    <p class="fileViews">{{ file.views }} view(s)</p>
     <p class="fileSize">{{ file.size }}</p>
     <div class="fileButtons">
       <p class="likes" ng-click="plusOneOnFile()">+{{ file.likes }}</p>
@@ -56,9 +61,12 @@
       <div id="{{ song.id }}" class="thumbnail file" ng-click="openFile($index)">
         <p class="title">{{ song.name }}</p>
         <p class="fileSize">{{ song.size }}</p>
-        <div class="fileButtons">
-          <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
-          <p class="download" ng-click="download($index)"><img src="img/downloadButton.png"></p>
+        <div>
+          <p class="fileViews col-md-6">{{ song.views }} view(s)</p>
+          <div class="fileButtons">
+            <p class="likes" ng-click="plusOne($index)">+{{ song.likes }}</p>
+            <p class="download" ng-click="download($index)"><img src="img/downloadButton.png"></p>
+          </div>
         </div>
       </div>
     </div>
