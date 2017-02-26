@@ -26,18 +26,30 @@
           <li><a href="/#/home">Home</a></li>
           <li><a href="/#/drive-audio">Song Ideas</a></li>
           <li><a href="/#/comment">Leave A Comment</a></li>
+          <li><a href="/#/home">Back Room</a></li>
+          <li><a href="/#/videos">Music Vidz</a></li>
+          <li><a href="/#/drive-audio">Jam Room</a></li>
         </ul>
       </nav>
     </div>
-
+ <!-- Header --> <!-- Need to move the header between head closing & body opening -->
+    <header font-variant='relative center'>
+        <section>
+        <h1 font-style='bold'>Music Studio <!-- or 'Manager' --> </h1>
+        <blockquote align='center'><strong>Artists'</strong> encourage, motivate, inspire, uplift, and stimulate creativity. - <em>Pablo Picasso</em></blockquote>
+          <br>
+          <p>Unite With Other Artist's to Share, Collaborate and Expand On Ideas Together, </p>
+    </header>       
     <div class="container" ng-view></div>
-
+<!-- Footer -->
+<footer>
     <div class="footer">
       <div class="container">
-        <p>Made by Kyle Vanderhoof - 2017</p>
+        <p>&copy 2017  &nbsp;&bull;&nbsp;<strong>A VanderFry Creation</strong> &nbsp;&bull;&nbsp</p>
+<!--        <p> <strong>Benjamin Fry</strong></p> -->
       </div>
     </div>
-
+</footer>
     <!-- Modules -->
     <script src="js/managers/app.js" type="text/javascript"></script>
     <script src="js/managers/drive.js" type="text/javascript"></script>
