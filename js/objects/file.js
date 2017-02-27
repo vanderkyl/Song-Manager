@@ -1,74 +1,108 @@
-var previousFiles = [];
+var CURRENT_FILE = {};
 
-function loadFile(file) {
-  switch(file.type) {
-    case "m4a":
-      loadAudio(file);
-      break;
-    case "MP4":
-      loadVideo(file);
-      break;
-    default:
-  }
-  loadDisqus(file);
+function getFile(newFile, $sce) {
+    var fileId = newFile.id;
+    var fileObject = {
+        name: newFile.title,
+        id: fileId,
+        path: $sce.trustAsResourceUrl(newFile.webContentLink),
+        previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+        type: newFile.fileExtension,
+        size: calculateFileSize(newFile.fileSize),
+        bytes: newFile.fileSize,
+        likes: getLikes(fileId),
+        views: getViews(fileId),
+        timestamps: []
+    };
+    return fileObject;
 }
 
-function loadFilePage(file) {
-  switch(file.type) {
-    case "m4a":
-      document.getElementById("videoId").style.display = "none";
-      break;
-    case "MP4":
-      document.getElementById("audioId").style.display = "none";
-      break;
-    default:
+function loadFilePage($sce) {
+  var file = CURRENT_FILE;
+  if (file.type === null) {
+    if (file.type === "m4a") {
+        hideElementById("videoId");
+    } else {
+        hideElementById("audioId");
+    }
+  } else {
+    //TODO finish filling out the file properties
+    console.log("Getting file from Google Drive");
+    var fileId = getParameterByName("id");
+      file = {
+          name: fileId,
+          id: fileId,
+          path: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+          previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
+          type: "m4a",
+          size: "",
+          bytes: "",
+          likes: getLikes(fileId),
+          views: getViews(fileId),
+          timestamps: []
+      };
   }
+  console.log(file);
+  displayElementById("file");
+  hideElementById("authorize-div")
   loadDisqus(file);
+  return file;
+}
+
+function loadFile(file) {
+    addViewToFile(file);
+    switch(file.type) {
+        case "m4a":
+            loadAudio(file);
+            break;
+        case "MP4":
+            loadVideo(file);
+            break;
+        default:
+    }
+    loadDisqus(file);
 }
 
 function loadVideo(file) {
-  var video = document.getElementById("video");
-  var fileDiv = document.getElementById("file");
-  $('#file').scrollView();
-  fileDiv.style.display = "block";
-  video.style.display = "block";
+  scrollToElementById("files");
+  displayElementById("video");
+  displayElementById("file");
 }
 
 function loadAudio(file) {
-  var audio = document.getElementById("audio");
-  var fileDiv = document.getElementById("file");
-  $('#file').scrollView();
-  fileDiv.style.display = "block";
-  audio.style.display = "block";
+  hideElementById("audioPlayer");
+  scrollToElementById("files");
+  displayElementById("file");
+  displayElementById("audio");
+  var audio = getElementById("audio");
   audio.load();
   audio.play();
 }
 
 function closeFile(id) {
+  checkIfAudioIsPlaying();
   hidePreviousFile();
-  var fileId = "#" + id;
-  $(fileId).scrollView();
+  //scrollToElementById(id);
 }
 
 function hidePreviousFile() {
   console.log("Hiding previous file.");
-  document.getElementById("file").style.display = "none";
-  document.getElementById("audio").style.display = "none";
-  document.getElementById("video").style.display = "none";
+  hideElementById("file");
+  hideElementById("audio");
+  hideElementById("video");
 }
 
 // Check if the "file" is a true file or a folder
 function checkFile(file, addFolder, addFile) {
-  //console.log("Checking...");
-  if (file.explicitlyTrashed == false) {
-    if (file.mimeType == "application/vnd.google-apps.folder") {
+  if (isTrashed(file)) {
+    if (isFolder(file)) {
       addFolder(file);
     } else {
       addFile(file);
     }
   }
-  if (previousFiles.length == 0) {
-    document.getElementById("loadSongs").style.display = "none";
+  if (PREVIOUS_FOLDER.length === 0) {
+    hideElementById("loadSongs");
   }
 };
 
@@ -76,30 +110,17 @@ function sortFiles(addFolder, addFile) {
   for (var i = 0; i < FILE_LIST.length; i++) {
     checkFile(FILE_LIST[i], addFolder, addFile);
   }
-  document.getElementById('loading').style.display = "none";
-}
-
-function getLikes(fileId) {
-  var likesId = "likes-" + fileId;
-  var fileLikes = localStorage.getItem(likesId);
-  if (fileLikes === null) {
-    localStorage.setItem(likesId, 0);
-    var likes = parseInt(localStorage.getItem(likesId));
-    return likes;
-  } else {
-    return fileLikes;
-  }
+  hideElementById("loading");
 }
 
 function roundToTwoDecimals(num) {
   return Math.round(num * 100) / 100;
 }
 
-function calculateFileSize (file) {
+function calculateFileSize(bytes) {
   var kiloByte = 1024;
   var megaByte = 1048576;
   var gigaByte = 1073741824;
-  var bytes =  parseInt(file.fileSize);
   var fileSize = bytes;
   if (bytes < kiloByte) {
     fileSize += " bytes";
@@ -113,66 +134,51 @@ function calculateFileSize (file) {
   return fileSize;
 }
 
-function getFile(newFile, $sce) {
-  var fileId = newFile.id;
-  var fileObject = {
-    name: newFile.title,
-    id: fileId,
-    path: $sce.trustAsResourceUrl(newFile.webContentLink),
-    previewPath: $sce.trustAsResourceUrl("https://drive.google.com/file/d/" + fileId + "/preview"),
-    type: newFile.fileExtension,
-    size: calculateFileSize(newFile),
-    bytes: newFile.fileSize,
-    likes: getLikes(newFile.id),
-    timestamps: []
-  };
-  return fileObject;
-}
-
-function getDriveFile() {
-  var request = gapi.client.drive.files.get({
-    'fileId': fileId
-  });
-  request.execute(function(resp) {
-    console.log('Title: ' + resp.title);
-    console.log('Description: ' + resp.description);
-    console.log('MIME type: ' + resp.mimeType);
-  });
-}
-
 function saveLike(file) {
-  var likesId = "likes-" + file.id;
-  var likes = parseInt(localStorage.getItem(likesId));
-  likes += 1;
-  localStorage.setItem(likesId, likes);
-  file.likes = likes;
+    var likesId = "likes-" + file.id;
+    var likes = parseInt(getItemFromLocalStorage(likesId));
+    likes += 1;
+    saveItemToLocalStorage(likesId, likes);
+    file.likes = likes;
 }
 
-// Get query paramater from url
-// Credit to
-function getParameterByName(name, url) {
-    if (!url) {
-      url = window.location.href;
+function getLikes(fileId) {
+    var likesId = "likes-" + fileId;
+    var fileLikes = getItemFromLocalStorage(likesId);
+    console.log(fileLikes + " likes");
+    if (fileLikes === null) {
+        saveItemToLocalStorage(likesId, 0);
+        return 0;
+    } else {
+        return fileLikes;
     }
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
 
-// Guarantee that the button pressed is the only one that activates
-// Use if there is a button on top of a button.
-function stopPropogation() {
-  event.cancelBubble = true;
-    if(event.stopPropagation) event.stopPropagation();
+function addViewToFile(file) {
+    var viewsId = "views-" + file.id;
+    var views = parseInt(getItemFromLocalStorage(viewsId));
+    views += 1;
+    saveItemToLocalStorage(viewsId, views);
+    file.views = views;
 }
 
-$.fn.scrollView = function () {
-  return this.each(function () {
-      $('html, body').animate({
-          scrollTop: $(this).offset().top
-      }, 1000);
-  });
+function getViews(fileId) {
+    var viewsId = "views-" + fileId;
+    var views = getItemFromLocalStorage(viewsId);
+    console.log(views + " views");
+    console.log(fileId + " id")
+    if (views === null) {
+        saveItemToLocalStorage(viewsId, 0);
+        return 0;
+    } else {
+        return views;
+    }
+}
+
+function isTrashed(file) {
+  return file.explicitlyTrashed === false;
+}
+
+function isFolder(file) {
+  return file.mimeType == "application/vnd.google-apps.folder";
 }

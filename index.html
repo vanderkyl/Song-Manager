@@ -17,15 +17,25 @@
     <script src="js/dependencies/angular/angular-route-1.5.8.min.js" type="text/javascript"></script>
     <script src="js/dependencies/angular/angular-mocks-1.5.8.js" type="text/javascript"></script>
     <script src="js/dependencies/angular/angular-resource-1.5.8.min.js" type="text/javascript"></script>
-    <script src="js/dependencies/drive/client.min.js"></script>
+    <script src="https://apis.google.com/js/client.js" type="text/javascript"></script>
   </head>
   <body ng-app="myApp">
     <div class="header">
       <nav class="navbar navbar-default navbar-static-top">
-        <ul class="nav navbar-nav">
+        <ul id="navRoutes" class="nav navbar-nav">
           <li><a href="/#/home">Home</a></li>
-          <li><a href="/#/drive-audio">Song Ideas</a></li>
+          <li><a href="/#/drive-audio">Music</a></li>
+          <li><a href="/#/file">File</a></li>
           <li><a href="/#/comment">Leave A Comment</a></li>
+        </ul>
+        <ul id="imageNavRoutes" class="nav navbar-nav">
+          <li><a href="/#/home"><img src="img/home.png"></a></li>
+          <li><a href="/#/drive-audio"><img src="img/music.png"></a></li>
+          <li><a href="/#/comment"><img src="img/comment.png"></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><div id="navTool1" class="navTools" onclick="useImageNavTheme();">Change Nav Theme</div></li>
+          <li><div id="navTool2" class="navTools" onclick="useTextNavTheme();">Change Back</div></li>
         </ul>
       </nav>
     </div>
@@ -38,20 +48,27 @@
       </div>
     </div>
 
-    <!-- Modules -->
+    <!-- Managers -->
     <script src="js/managers/app.js" type="text/javascript"></script>
     <script src="js/managers/drive.js" type="text/javascript"></script>
+    <script src="js/managers/settings.js" type="text/javascript"></script>
+
+    <!-- Objects -->
     <script src="js/objects/folder.js" type="text/javascript"></script>
     <script src="js/objects/file.js" type="text/javascript"></script>
-
-    <!-- Disqus -->
-    <script src="js/managers/disqus.js" type="text/javascript"></script>
-    <script id="dsq-count-scr" src="//idea-app.disqus.com/count.js" async></script>
+    <script src="js/objects/audio.js" type="text/javascript"></script>
+    <script src="js/objects/test.js" type=""text/javascript"></script>
 
     <!-- Controllers -->
     <script src="js/controllers/MainController.js" type="text/javascript"></script>
     <script src="js/controllers/DriveController.js" type="text/javascript"></script>
     <script src="js/controllers/CommentController.js" type="text/javascript"></script>
+    <script src="js/controllers/FileController.js" type="text/javascript"></script>
+    <script src="js/controllers/webController.js" type="text/javascript"></script>
+
+    <!-- Disqus -->
+    <script src="js/managers/disqus.js" type="text/javascript"></script>
+    <script id="dsq-count-scr" src="//idea-app.disqus.com/count.js" async></script>
 
     <!-- Directives -->
     <script src="js/directives/loading.js" type="text/javascript"></script>

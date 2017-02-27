@@ -1,6 +1,7 @@
 app.controller('DriveController', ['$scope', '$sce',
 function($scope, $sce) {
   $scope.loginMessage = "Logging In";
+  $scope.testMessage = "Load Test Files";
   // Folders
   $scope.folders = [];
   $scope.folderName = "";
@@ -70,11 +71,9 @@ function($scope, $sce) {
   $scope.downloadFile = function(file) {
     // Check if file is greater than 25 MB
     if (file.bytes > 26214400) {
-        console.log(file.bytes);
-        var win = window.open(file.path, '_blank');
-        win.focus();
+        openLinkInNewTab(file.path);
     } else {
-        window.location = file.path;
+        navigateToURL(file.path);
     }
   }
 
@@ -86,6 +85,11 @@ function($scope, $sce) {
     }
     sortFiles($scope.addFolder, $scope.addFile);
   };
+
+  $scope.goToFilePage = function() {
+    navigateToURL("/#/file?id=" + $scope.file.id);
+    CURRENT_FILE = $scope.file;
+  }
 
   // Add button to go back to previous folder contents
   $scope.addPreviousButton = function() {
@@ -116,10 +120,10 @@ function($scope, $sce) {
     $scope.folders = [];
     $scope.files = [];
     console.log("Cleared previous folders and files.");
-    document.getElementById("file").style.display = "none";
+    hideElementById("file");
   };
 
-  // Safely wait until the digest is funished before applying the ui change
+  // Safely wait until the digest is finished before applying the ui change
   $scope.safeApply = function(fn) {
     var phase = this.$root.$$phase;
     if(phase == '$apply' || phase == '$digest') {
@@ -130,17 +134,24 @@ function($scope, $sce) {
       this.$apply(fn);
     }
   };
+
   //TODO remove log in button when reentering
   // If a folder is already open get the files, else log in.
-  if (FILE_LIST.length != 0) {
+  if (FILE_LIST.length !== 0) {
     $scope.getFiles();
-    document.getElementById("authorize-div").style.display = "none";
+    hideElementById("authorize-div");
   } else {
-    try {
-      checkAuth();
-    } catch (err) {
-      $scope.loginMessage = "Log In";
-      console.log("Authorization failed. Please log in.");
+    displayElementById("authorize-div");
+    if (getParameterByName("test") === "true") {
+        console.log(getParameterByName("test"));
+        displayElementById("loadTestButton");
+    } else {
+        try {
+            checkAuth();
+        } catch (err) {
+            $scope.loginMessage = "Log In";
+            console.log("Authorization failed. Please log in.");
+        }
     }
   }
 }]);

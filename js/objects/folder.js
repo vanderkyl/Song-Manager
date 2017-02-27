@@ -35,6 +35,7 @@ function folderIsCached(folderId, recentFiles) {
 }
 
 function loadFolder(folderId, loadFiles, getFiles, wait) {
+  checkIfAudioIsPlaying();
   if (requestingPreviousFolder(folderId)) {
     hidePreviousFile();
     FILE_LIST = PREVIOUS_FOLDER.pop();
@@ -44,7 +45,7 @@ function loadFolder(folderId, loadFiles, getFiles, wait) {
     listCachedFiles(folderId, RECENT_FOLDER);
     wait(loadFiles);
   } else {
-    document.getElementById('loading').style.display = "block";
+    displayElementById("loading");
     PREVIOUS_FOLDER.push(FILE_LIST);
     listFiles(folderId, RECENT_FOLDER);
     console.log("Files are loading. Please wait...");

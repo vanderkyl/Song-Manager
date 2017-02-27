@@ -1,4 +1,13 @@
-<div id="fileId" class="container">
+<loading id="loading"></loading>
+
+<!-- Login to Google Drive -->
+<div id="authorize-div" class="col-md-12">
+  <div id="loginButton" class="thumbnail folder" onclick="handleAuthClick(event);">
+    <p class="title folderTitle">{{ loginMessage }}</p>
+  </div>
+</div>
+
+<div id="file" class="container">
   <br><br>
   <p class="fileTitle">{{ file.name }}</p>
   <br><br>
@@ -18,26 +27,3 @@
   <div id="disqus_thread"></div>
   <br>
 </div>
-<script>
-  document.getElementById("fileId").onload = function() {getId()};
-  function getId() {
-    console.log("Getting parameter: ");
-    fileId = getParameterByName('id');
-    console.log(fileId);
-    if (fileId !== null) {
-      var file = {
-        name: fileId,
-        id: fileId,
-        path: "https://drive.google.com/uc?id=" + fileId + "&export=download",
-        previewPath: "https://drive.google.com/file/d/" + fileId + "/preview",
-        type: "m4a",
-        pubdate: fileId,
-        likes: getLikes(fileId),
-        comment: "Nothing",
-        index: 0,
-        timestamps: []
-      };
-      loadFilePage(file);
-    }
-  };
-</script>

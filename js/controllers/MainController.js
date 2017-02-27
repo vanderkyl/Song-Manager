@@ -1,11 +1,11 @@
 app.controller('MainController', ['$scope',
 function($scope) {
-  $scope.title = 'IDEAS';
-  $scope.message = 'Leave a comment if you find a bug, issue, improvement idea, etc';
+  $scope.title = 'Idea Manager';
+  $scope.message = '';
   $scope.navigateToSongIdeas = function() {
-    window.location = "/#/drive-audio";
+    navigateToURL("/#/drive-audio");
   };
   $scope.navigateToComments = function() {
-      window.location = "/#/comments";
+    navigateToURL("/#/comment");
   };
 }]);
